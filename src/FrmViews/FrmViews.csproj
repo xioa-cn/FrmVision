@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3E311B69-9936-404B-9C45-65F4027F14D9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>FrmViews</RootNamespace>
+    <AssemblyName>FrmViews</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Cognex.VisionPro, Version=59.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.Controls">
+      <HintPath>C:\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.Core">
+      <HintPath>C:\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.Display.Controls">
+      <HintPath>C:\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.Display.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.ImageFile, Version=59.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.ImageFile.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.Inspection.Controls, Version=59.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.Inspection.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.ToolGroup">
+      <HintPath>C:\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.ToolGroup.dll</HintPath>
+    </Reference>
+    <Reference Include="CommunityToolkit.Mvvm, Version=8.4.0.0, Culture=neutral, PublicKeyToken=4aff67a105548ee2, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CommunityToolkit.Mvvm.8.4.2\lib\netstandard2.0\CommunityToolkit.Mvvm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=10.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Bcl.AsyncInterfaces.10.0.1\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Memory.4.6.3\lib\net462\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Numerics.Vectors.4.6.1\lib\net462\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.6.3\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\CameraParameterSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CameraParameterSelector.Designer.cs">
+      <DependentUpon>CameraParameterSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CameraViewportControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CameraViewportControl.Designer.cs">
+      <DependentUpon>CameraViewportControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CameraWorkspaceControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CameraWorkspaceControl.Designer.cs">
+      <DependentUpon>CameraWorkspaceControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CommunicationTopologyControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DeviceStatusBadge.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DeviceStatusBadge.Designer.cs">
+      <DependentUpon>DeviceStatusBadge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MachineStatusBarControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MachineStatusBarControl.Designer.cs">
+      <DependentUpon>MachineStatusBarControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainDashboardControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MainDashboardControl.Designer.cs">
+      <DependentUpon>MainDashboardControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainNavigationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MainNavigationControl.Designer.cs">
+      <DependentUpon>MainNavigationControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ParameterWorkspaceControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ParameterWorkspaceControl.Designer.cs">
+      <DependentUpon>ParameterWorkspaceControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UiTheme.cs" />
+    <Compile Include="MainFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainFrm.Designer.cs">
+      <DependentUpon>MainFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Nodes\BoolNode.cs" />
+    <Compile Include="Nodes\CalcNumNode.cs" />
+    <Compile Include="Nodes\CameraNode.cs" />
+    <Compile Include="Nodes\CharacterMergingNode.cs" />
+    <Compile Include="Nodes\ComparisonNode.cs" />
+    <Compile Include="Nodes\CompensationNode.cs" />
+    <Compile Include="Nodes\EndNode.cs" />
+    <Compile Include="Nodes\GlobalDataNode.cs" />
+    <Compile Include="Nodes\LightSourceNode.cs" />
+    <Compile Include="Nodes\NegateNode.cs" />
+    <Compile Include="Nodes\NumNode.cs" />
+    <Compile Include="Nodes\PictureNode.cs" />
+    <Compile Include="Nodes\PlcComparisonOutputsPropertyDescriptor.cs" />
+    <Compile Include="Nodes\PlcNode.cs" />
+    <Compile Include="Nodes\PlcValueTransmitNode.cs" />
+    <Compile Include="Nodes\PlcWriteItemsPropertyDescriptor.cs" />
+    <Compile Include="Nodes\PlcWriteTransmitNode.cs" />
+    <Compile Include="Nodes\RecipeNode.cs" />
+    <Compile Include="Nodes\ReplaceNode.cs" />
+    <Compile Include="Nodes\SaveImageNode.cs" />
+    <Compile Include="Nodes\StartNode.cs" />
+    <Compile Include="Nodes\StringNode.cs" />
+    <Compile Include="Nodes\ManualTriggerNode.cs" />
+    <Compile Include="Nodes\TrimNode.cs" />
+    <Compile Include="Nodes\VisionNode.cs" />
+    <Compile Include="Nodes\WaitingRhythmNode.cs" />
+    <Compile Include="Nodes\WorkflowNode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\WorkflowRuntime.cs" />
+    <Compile Include="Views\CameraConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CameraConfig.Designer.cs">
+      <DependentUpon>CameraConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CommunicationFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CommunicationFrm.Designer.cs">
+      <DependentUpon>CommunicationFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HslAuthorizationFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\HslAuthorizationFrm.Designer.cs">
+      <DependentUpon>HslAuthorizationFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CompensationStepEditorFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParametersConfigFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ParametersConfigFrm.Designer.cs">
+      <DependentUpon>ParametersConfigFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Register.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Register.Designer.cs">
+      <DependentUpon>Register.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrimItemsEditorFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ReplaceItemsEditorFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\EditorFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\EditorFrm.Designer.cs">
+      <DependentUpon>EditorFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlcComparisonOutputEditorFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PlcComparisonOutputEditorFrm.Designer.cs">
+      <DependentUpon>PlcComparisonOutputEditorFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlcWriteItemEditorFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\UserManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\UserManager.Designer.cs">
+      <DependentUpon>UserManager.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Controls\CameraViewportControl.resx">
+      <DependentUpon>CameraViewportControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ParameterWorkspaceControl.resx">
+      <DependentUpon>ParameterWorkspaceControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFrm.resx">
+      <DependentUpon>MainFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Views\CommunicationFrm.resx">
+      <DependentUpon>CommunicationFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserManager.resx">
+      <DependentUpon>UserManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\NodeEditor.Library\NodeEditor.Library.csproj">
+      <Project>{0127d095-0d14-4103-b182-7ca96a3a4425}</Project>
+      <Name>NodeEditor.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FrmCommon\FrmCommon.csproj">
+      <Project>{22bb27e0-088e-4104-b6c5-a87de463f668}</Project>
+      <Name>FrmCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FrmMapper\FrmMapper.csproj">
+      <Project>{0e206275-d8b3-4586-9555-78ef99ab8afa}</Project>
+      <Name>FrmMapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FrmServices\FrmServices.csproj">
+      <Project>{022527b6-7604-48f4-8cae-7968efb95a03}</Project>
+      <Name>FrmServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FrmVpComponents\FrmVpComponents.csproj">
+      <Project>{7ae2cfe2-c375-4493-9e99-175ba2f71fd8}</Project>
+      <Name>FrmVpComponents</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\..\packages\CommunityToolkit.Mvvm.8.4.2\build\CommunityToolkit.Mvvm.targets" Condition="Exists('..\..\packages\CommunityToolkit.Mvvm.8.4.2\build\CommunityToolkit.Mvvm.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\CommunityToolkit.Mvvm.8.4.2\build\CommunityToolkit.Mvvm.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CommunityToolkit.Mvvm.8.4.2\build\CommunityToolkit.Mvvm.targets'))" />
+  </Target>
+</Project>

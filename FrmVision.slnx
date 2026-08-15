@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="E:/PROJECT/TestProject/FrmVision/src/FrmCommon/FrmCommon.csproj" Id="22bb27e0-088e-4104-b6c5-a87de463f668" />
+    <Project Path="E:/PROJECT/TestProject/FrmVision/src/FrmMapper/FrmMapper.csproj" Id="0e206275-d8b3-4586-9555-78ef99ab8afa" />
+    <Project Path="E:/PROJECT/TestProject/FrmVision/src/FrmServices/FrmServices.csproj" Id="022527b6-7604-48f4-8cae-7968efb95a03" />
+    <Project Path="E:/PROJECT/TestProject/FrmVision/src/FrmViews/FrmViews.csproj" Id="3e311b69-9936-404b-9c45-65f4027f14d9" />
+    <Project Path="NodeEditor.Library/NodeEditor.Library.csproj" Id="0127d095-0d14-4103-b182-7ca96a3a4425" />
+    <Project Path="src/FrmVpComponents/FrmVpComponents.csproj" Id="7ae2cfe2-c375-4493-9e99-175ba2f71fd8" />
+  </Folder>
+  <Project Path="E:/PROJECT/TestProject/FrmVision/ApplicationStartup/ApplicationStartup.csproj" Id="d47abd4c-6c18-43c0-bcd7-bce223729b24" />
+</Solution>
