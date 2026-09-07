@@ -72,6 +72,7 @@ namespace FrmViews.Views
             nodeEditorPannel.AddSTNode(typeof(RecipeNode));
             nodeEditorPannel.AddSTNode(typeof(ManualTriggerNode));
             nodeEditorPannel.AddSTNode(typeof(WaitingRhythmNode));
+            nodeEditorPannel.AddSTNode(typeof(SleepNode));
 
             // 数据源
             nodeEditorPannel.AddSTNode(typeof(StringNode));

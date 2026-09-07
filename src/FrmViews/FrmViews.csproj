@@ -180,6 +180,7 @@
     <Compile Include="Nodes\RecipeNode.cs" />
     <Compile Include="Nodes\ReplaceNode.cs" />
     <Compile Include="Nodes\SaveImageNode.cs" />
+    <Compile Include="Nodes\SleepNode.cs" />
     <Compile Include="Nodes\StartNode.cs" />
     <Compile Include="Nodes\StringNode.cs" />
     <Compile Include="Nodes\ManualTriggerNode.cs" />
