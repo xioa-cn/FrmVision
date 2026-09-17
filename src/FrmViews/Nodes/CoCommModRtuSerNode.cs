@@ -1,13 +1,12 @@
+using System;
+using System.Globalization;
+using FrmMapper.Data;
+using FrmServices.Services.CommunicationServices;
+using FrmServices.Services.EditorServices;
+using ST.Library.UI.NodeEditor;
+
 namespace FrmViews.Nodes
 {
-    using System;
-    using System.Globalization;
-    using FrmMapper.Data;
-    using FrmServices.Services.CommunicationServices;
-    using FrmServices.Services.EditorServices;
-    using ST.Library.UI.NodeEditor;
-
-
     [STNode("内置通讯", "xioa", null, null,
         "读取或写入内置 Modbus RTU 服务端的数据区，与外部 Modbus 客户端共享线圈和寄存器数据。")]
     public sealed class CoCommModRtuSerNode : WorkflowNode, IEditorExecutableNode, IEditorNodeReadiness
@@ -34,7 +33,8 @@ namespace FrmViews.Nodes
         [STNodeProperty("地址", "从 0 开始的地址，例如 100；Bool 默认访问线圈，数值默认访问保持寄存器。离散输入用 x=2;100，输入寄存器用 x=4;100；服务端本地均可读写。")]
         public string Address { get; set; } = "0";
 
-        [STNodeProperty("数据类型", "Bool 为布尔量；Short/UShort 为 16 位，Int/UInt/Float 为 32 位，Long/ULong/Double 为 64 位；String 使用 ASCII。")]
+        [STNodeProperty("数据类型",
+            "Bool 为布尔量；Short/UShort 为 16 位，Int/UInt/Float 为 32 位，Long/ULong/Double 为 64 位；String 使用 ASCII。")]
         public ModbusServerValueType ValueType { get; set; } = ModbusServerValueType.UShort;
 
         [STNodeProperty("读取长度", "Bool/数值按元素数量读取，1 输出单值，大于 1 输出数组；String 按寄存器数量读取，每个寄存器 2 个 ASCII 字符。写入数量由写入值决定。")]
@@ -78,14 +78,24 @@ namespace FrmViews.Nodes
                     case ModbusServerValueType.String: value = ExecuteString(server); break;
                     default: throw new InvalidOperationException("Modbus 数据类型无效。");
                 }
+
                 context.CancellationToken.ThrowIfCancellationRequested();
                 Output.Data = value;
                 Output.TransferData();
-                return EditorNodeExecutionResult.Success("Modbus RTU 服务端“" + CommunicationKey.Trim() + "”地址 " + Address.Trim() +
-                    (OperationMode == ModbusServerOperationMode.Read ? " 读取成功。" : " 写入成功。"), Output);
+                return EditorNodeExecutionResult.Success("Modbus RTU 服务端“" + CommunicationKey.Trim() + "”地址 " +
+                                                         Address.Trim() +
+                                                         (OperationMode == ModbusServerOperationMode.Read
+                                                             ? " 读取成功。"
+                                                             : " 写入成功。"), Output);
             }
-            catch (OperationCanceledException) { throw; }
-            catch (Exception ex) { return EditorNodeExecutionResult.Failure(ex.GetBaseException().Message); }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                return EditorNodeExecutionResult.Failure(ex.GetBaseException().Message);
+            }
         }
 
         private object ExecuteTyped<T>(ContentModbusRtuServer server)
@@ -113,6 +123,7 @@ namespace FrmViews.Nodes
                 EnsureSuccess(server.Write(Address.Trim(), values));
                 return values;
             }
+
             T value = ConvertValue<T>(source);
             EnsureSuccess(server.Write(Address.Trim(), value));
             return value;
@@ -128,6 +139,7 @@ namespace FrmViews.Nodes
                     throw new InvalidOperationException("Modbus 未返回有效的字符串。");
                 return result.Data[0];
             }
+
             object source = GetWriteValue();
             if (!(source is string) && !(source is IConvertible))
                 throw new InvalidOperationException("String 写入值必须是文本或可转换为文本的单值。");
@@ -135,7 +147,8 @@ namespace FrmViews.Nodes
             if (string.IsNullOrEmpty(value)) throw new InvalidOperationException("Modbus 写入文本不能为空。");
             if (value.Length > 65534) throw new InvalidOperationException("Modbus 写入文本过长。");
             foreach (char character in value)
-                if (character > 127) throw new InvalidOperationException("Modbus String 使用 ASCII，请勿写入中文等非 ASCII 字符。");
+                if (character > 127)
+                    throw new InvalidOperationException("Modbus String 使用 ASCII，请勿写入中文等非 ASCII 字符。");
             EnsureSuccess(server.Write(Address.Trim(), value));
             return value;
         }
@@ -158,6 +171,7 @@ namespace FrmViews.Nodes
                 if (bool.TryParse(text, out bool boolean)) return (T)(object)boolean;
                 throw new FormatException("布尔值必须为 true、false、1 或 0。");
             }
+
             // Parse integers without silently rounding fractional inputs.
             T converted = (T)Convert.ChangeType(text, typeof(T), CultureInfo.InvariantCulture);
             if (converted is float single && (float.IsNaN(single) || float.IsInfinity(single)) ||
@@ -168,9 +182,11 @@ namespace FrmViews.Nodes
 
         private void ValidateCount(int count)
         {
-            int registersPerValue = ValueType == ModbusServerValueType.Long || ValueType == ModbusServerValueType.ULong ||
-                ValueType == ModbusServerValueType.Double ? 4 :
-                ValueType == ModbusServerValueType.Int || ValueType == ModbusServerValueType.UInt || ValueType == ModbusServerValueType.Float ? 2 : 1;
+            int registersPerValue = ValueType == ModbusServerValueType.Long ||
+                                    ValueType == ModbusServerValueType.ULong ||
+                                    ValueType == ModbusServerValueType.Double ? 4 :
+                ValueType == ModbusServerValueType.Int || ValueType == ModbusServerValueType.UInt ||
+                ValueType == ModbusServerValueType.Float ? 2 : 1;
             if (count < 1 || count > short.MaxValue || (long)count * registersPerValue > ushort.MaxValue)
                 throw new InvalidOperationException("Modbus 长度必须大于 0，且不能超过当前数据类型支持的数据区长度。");
         }
@@ -186,7 +202,8 @@ namespace FrmViews.Nodes
             if (!context.IsInputActivated(Input) &&
                 !(Input.GetConnectedOption() != null && GlobalDataNode.IsReadSource(Input)))
                 return EditorNodeReadinessResult.NotReady("等待输入触发信号。");
-            if (OperationMode == ModbusServerOperationMode.Write && ValueSource == ModbusServerWriteValueSource.Input && Input.Data == null)
+            if (OperationMode == ModbusServerOperationMode.Write && ValueSource == ModbusServerWriteValueSource.Input &&
+                Input.Data == null)
                 return EditorNodeReadinessResult.NotReady("等待需要写入的输入值。");
             return EditorNodeReadinessResult.Ready();
         }

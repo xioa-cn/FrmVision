@@ -85,6 +85,8 @@ namespace FrmViews.Views
             nodeEditorPannel.AddSTNode(typeof(ReplaceNode));
             nodeEditorPannel.AddSTNode(typeof(CompensationNode));
             nodeEditorPannel.AddSTNode(typeof(CalcNumNode));
+            nodeEditorPannel.AddSTNode(typeof(RandomNode));
+            nodeEditorPannel.AddSTNode(typeof(RoundOffNode));
 
             // 逻辑判断
             nodeEditorPannel.AddSTNode(typeof(ComparisonNode));

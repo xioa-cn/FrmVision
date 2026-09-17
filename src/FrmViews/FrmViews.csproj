@@ -184,6 +184,7 @@
     <Compile Include="Nodes\RandomNode.cs" />
     <Compile Include="Nodes\RecipeNode.cs" />
     <Compile Include="Nodes\ReplaceNode.cs" />
+    <Compile Include="Nodes\RoundOffNode.cs" />
     <Compile Include="Nodes\SaveImageNode.cs" />
     <Compile Include="Nodes\SleepNode.cs" />
     <Compile Include="Nodes\StartNode.cs" />
