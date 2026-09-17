@@ -102,6 +102,7 @@ namespace FrmViews.Views
             // 内置通讯
             nodeEditorPannel.AddSTNode(typeof(CoCommTcpSerNode));
             nodeEditorPannel.AddSTNode(typeof(CoCommTcpCliNode));
+            nodeEditorPannel.AddSTNode(typeof(CoCommSerialNode));
             nodeEditorPannel.AddSTNode(typeof(CoCommModTcpSerNode));
             nodeEditorPannel.AddSTNode(typeof(CoCommModRtuSerNode));
 

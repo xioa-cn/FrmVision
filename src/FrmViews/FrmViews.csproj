@@ -166,6 +166,7 @@
     <Compile Include="Nodes\CharacterMergingNode.cs" />
     <Compile Include="Nodes\CoCommModRtuSerNode.cs" />
     <Compile Include="Nodes\CoCommModTcpSerNode.cs" />
+    <Compile Include="Nodes\CoCommSerialNode.cs" />
     <Compile Include="Nodes\CoCommTcpCliNode.cs" />
     <Compile Include="Nodes\CoCommTcpSerNode.cs" />
     <Compile Include="Nodes\ComparisonNode.cs" />

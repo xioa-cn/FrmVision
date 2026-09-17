@@ -55,6 +55,7 @@ namespace FrmServices.Services.EditorServices
         public Func<string, ContentTcpClient> TcpClientResolver { get; set; }
         public Func<string, ContentModbusTcpServer> ModbusTcpServerResolver { get; set; }
         public Func<string, ContentModbusRtuServer> ModbusRtuServerResolver { get; set; }
+        public Func<string, OriginalSerialPort> SerialPortResolver { get; set; }
         public Func<string, LightSourceFrmVpCommunication> LightSourceResolver { get; set; }
         public Func<int> NodeTransitionDelayMillisecondsProvider { get; set; }
         public Func<int> SuccessfulCycleDelayMillisecondsProvider { get; set; }
@@ -148,6 +149,17 @@ namespace FrmServices.Services.EditorServices
             if (server == null)
                 throw new InvalidOperationException("未找到 Modbus RTU 服务端：" + normalizedKey + "。");
             return server;
+        }
+
+        public OriginalSerialPort ResolveSerialPort(string key)
+        {
+            string normalizedKey = RequireKey(key, "原始串口");
+            if (SerialPortResolver == null)
+                throw new InvalidOperationException("未配置内置原始串口解析器。");
+            var port = SerialPortResolver(normalizedKey);
+            if (port == null)
+                throw new InvalidOperationException("未找到原始串口：" + normalizedKey + "。");
+            return port;
         }
 
         internal void BeginExecution()
@@ -262,6 +274,7 @@ namespace FrmServices.Services.EditorServices
                 TcpClientResolver = TcpClientResolver,
                 ModbusTcpServerResolver = ModbusTcpServerResolver,
                 ModbusRtuServerResolver = ModbusRtuServerResolver,
+                SerialPortResolver = SerialPortResolver,
                 LightSourceResolver = LightSourceResolver,
                 NodeTransitionDelayMillisecondsProvider =
                     NodeTransitionDelayMillisecondsProvider,

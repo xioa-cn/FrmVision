@@ -189,6 +189,7 @@ namespace FrmServices.ViewModel
             SetMenuEnabled(MainMenuKeys.HistoryLogs, canOperate);
             SetMenuEnabled(MainMenuKeys.StorageSettings, canConfigure);
             SetMenuEnabled(MainMenuKeys.Communication, canConfigure);
+            SetMenuEnabled(MainMenuKeys.ContentCommunication, canConfigure);
             SetMenuEnabled(MainMenuKeys.UserManager,
                 UserSession.IsAdministrator);
             SetMenuEnabled(MainMenuKeys.CameraTools, canConfigure);

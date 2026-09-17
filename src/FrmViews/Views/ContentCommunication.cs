@@ -37,8 +37,14 @@ namespace FrmViews.Views
         private ContentCommunicationConfiguration _draft;
         private bool _dirty, _updating, _busy;
 
-        public ContentCommunication() : this(new ContentCommunicationViewModel(), true) { }
-        public ContentCommunication(ContentCommunicationViewModel viewModel) : this(viewModel, false) { }
+        public ContentCommunication() : this(new ContentCommunicationViewModel(), true)
+        {
+        }
+
+        public ContentCommunication(ContentCommunicationViewModel viewModel) : this(viewModel, false)
+        {
+        }
+
         private ContentCommunication(ContentCommunicationViewModel viewModel, bool ownsViewModel)
         {
             _viewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
@@ -71,13 +77,17 @@ namespace FrmViews.Views
             AutoValidate = AutoValidate.EnableAllowFocusChange;
             MinimumSize = new Size(960, 640);
             ClientSize = new Size(1120, 720);
-            _errors = new ErrorProvider(components) { ContainerControl = this, BlinkStyle = ErrorBlinkStyle.NeverBlink };
-            var root = new TableLayoutPanel { Dock = DockStyle.Fill, Padding = new Padding(16), ColumnCount = 1, RowCount = 4 };
+            _errors = new ErrorProvider(components)
+                { ContainerControl = this, BlinkStyle = ErrorBlinkStyle.NeverBlink };
+            var root = new TableLayoutPanel
+                { Dock = DockStyle.Fill, Padding = new Padding(16), ColumnCount = 1, RowCount = 4 };
             root.RowStyles.Add(new RowStyle(SizeType.Absolute, 44));
             root.RowStyles.Add(new RowStyle(SizeType.Absolute, 48));
             root.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
             root.RowStyles.Add(new RowStyle(SizeType.Absolute, 38));
-            root.Controls.Add(new Label { Text = "内部通讯配置", AutoSize = true, Font = new Font(Font.FontFamily, 17, FontStyle.Bold) }, 0, 0);
+            root.Controls.Add(
+                new Label { Text = "内部通讯配置", AutoSize = true, Font = new Font(Font.FontFamily, 17, FontStyle.Bold) }, 0,
+                0);
             var toolbar = new FlowLayoutPanel { Dock = DockStyle.Fill, WrapContents = false };
             _type.DropDownStyle = ComboBoxStyle.DropDownList;
             _type.Width = 175;
@@ -91,6 +101,7 @@ namespace FrmViews.Views
                 button.Margin = new Padding(6, 0, 0, 0);
                 toolbar.Controls.Add(button);
             }
+
             root.Controls.Add(toolbar, 0, 1);
             var workspace = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, RowCount = 1 };
             workspace.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 48));
@@ -106,7 +117,8 @@ namespace FrmViews.Views
             _list.BackgroundColor = UiTheme.Surface;
             _list.BorderStyle = BorderStyle.None;
             _list.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            foreach (var field in new[] { new[] { "Name", "名称" }, new[] { "TypeText", "类型" }, new[] { "Endpoint", "地址" } })
+            foreach (var field in new[]
+                         { new[] { "Name", "名称" }, new[] { "TypeText", "类型" }, new[] { "Endpoint", "地址" } })
                 _list.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = field[0], HeaderText = field[1] });
             _list.Columns.Add(new DataGridViewTextBoxColumn { Name = "RuntimeStatus", HeaderText = "状态" });
             _list.CellFormatting += (s, e) =>
@@ -118,7 +130,8 @@ namespace FrmViews.Views
                 }
             };
             workspace.Controls.Add(_list, 0, 0);
-            var details = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 1, RowCount = 5, Padding = new Padding(12, 0, 0, 0) };
+            var details = new TableLayoutPanel
+                { Dock = DockStyle.Fill, ColumnCount = 1, RowCount = 5, Padding = new Padding(12, 0, 0, 0) };
             details.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
             details.RowStyles.Add(new RowStyle(SizeType.Percent, 65));
             details.RowStyles.Add(new RowStyle(SizeType.Absolute, 38));
@@ -129,7 +142,12 @@ namespace FrmViews.Views
             _editor.Dock = DockStyle.Fill;
             _editor.ToolbarVisible = false;
             _editor.PropertySort = PropertySort.Categorized;
-            _editor.PropertyValueChanged += (s, e) => { _dirty = true; _errors.Clear(); UpdateButtons(); };
+            _editor.PropertyValueChanged += (s, e) =>
+            {
+                _dirty = true;
+                _errors.Clear();
+                UpdateButtons();
+            };
             _editor.Validating += (s, e) =>
             {
                 string error = _draft == null ? null : ContentCommunicationViewModel.ValidateConfiguration(_draft);
@@ -138,7 +156,8 @@ namespace FrmViews.Views
             };
             details.Controls.Add(_editor, 0, 1);
             var debugHeader = new FlowLayoutPanel { Dock = DockStyle.Fill, WrapContents = false };
-            debugHeader.Controls.Add(new Label { Text = "TCP 调试（发送不自动加换行）", AutoSize = true, Margin = new Padding(0, 8, 8, 0) });
+            debugHeader.Controls.Add(new Label
+                { Text = "文本调试（发送不自动加换行）", AutoSize = true, Margin = new Padding(0, 8, 8, 0) });
             _showHex.Margin = new Padding(0, 7, 0, 0);
             debugHeader.Controls.Add(_showHex);
             details.Controls.Add(debugHeader, 0, 2);
@@ -164,7 +183,15 @@ namespace FrmViews.Views
             _status.TextAlign = ContentAlignment.MiddleLeft;
             root.Controls.Add(_status, 0, 3);
             Controls.Add(root);
-            _add.Click += (s, e) => { if (ConfirmDraft()) { LoadDraft(_viewModel.CreateConfiguration((ContentCommunicationType)_type.SelectedIndex)); _dirty = true; UpdateButtons(); } };
+            _add.Click += (s, e) =>
+            {
+                if (ConfirmDraft())
+                {
+                    LoadDraft(_viewModel.CreateConfiguration((ContentCommunicationType)_type.SelectedIndex));
+                    _dirty = true;
+                    UpdateButtons();
+                }
+            };
             _save.Click += (s, e) => SaveDraft();
             _delete.Click += DeleteSelected;
             _start.Click += async (s, e) =>
@@ -173,7 +200,14 @@ namespace FrmViews.Views
                 string id = _draft.Id;
                 await RunOperation(() => _viewModel.StartAsync(id), "启动成功");
             };
-            _stop.Click += async (s, e) => { if (_draft != null) { string id = _draft.Id; await RunOperation(() => _viewModel.StopAsync(id), "已停止"); } };
+            _stop.Click += async (s, e) =>
+            {
+                if (_draft != null)
+                {
+                    string id = _draft.Id;
+                    await RunOperation(() => _viewModel.StopAsync(id), "已停止");
+                }
+            };
             _send.Click += async (s, e) =>
             {
                 if (_draft == null) return;
@@ -191,10 +225,13 @@ namespace FrmViews.Views
             if (!ConfirmDraft())
             {
                 _updating = true;
-                _source.Position = _draft == null ? -1 : _viewModel.Configurations.ToList().FindIndex(c => c.Id == _draft.Id);
+                _source.Position = _draft == null
+                    ? -1
+                    : _viewModel.Configurations.ToList().FindIndex(c => c.Id == _draft.Id);
                 _updating = false;
                 return;
             }
+
             _updating = true;
             _source.Position = position;
             _updating = false;
@@ -216,9 +253,22 @@ namespace FrmViews.Views
             if (_draft == null || !ValidateChildren()) return false;
             _updating = true;
             Result result;
-            try { result = _viewModel.SaveConfiguration(_draft); }
-            finally { _updating = false; }
-            if (!result.IsSuccess) { _errors.SetError(_editor, result.Message); ShowError(result.Message); return false; }
+            try
+            {
+                result = _viewModel.SaveConfiguration(_draft);
+            }
+            finally
+            {
+                _updating = false;
+            }
+
+            if (!result.IsSuccess)
+            {
+                _errors.SetError(_editor, result.Message);
+                ShowError(result.Message);
+                return false;
+            }
+
             _dirty = false;
             _updating = true;
             _source.Position = _viewModel.Configurations.ToList().FindIndex(c => c.Id == _draft.Id);
@@ -231,20 +281,39 @@ namespace FrmViews.Views
         private bool ConfirmDraft()
         {
             if (!_dirty) return true;
-            var answer = MessageBox.Show(this, "当前配置尚未保存，是否保存？", Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            var answer = MessageBox.Show(this, "当前配置尚未保存，是否保存？", Text, MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question);
             return answer == DialogResult.No || (answer == DialogResult.Yes && SaveDraft());
         }
 
         private void DeleteSelected(object sender, EventArgs e)
         {
             if (_draft == null) return;
-            if (MessageBox.Show(this, "确定删除“" + _draft.Name + "”？", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
-            if (!_viewModel.Configurations.Any(c => c.Id == _draft.Id)) { LoadDraft(_source.Current as ContentCommunicationConfiguration); return; }
+            if (MessageBox.Show(this, "确定删除“" + _draft.Name + "”？", Text, MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question) != DialogResult.Yes) return;
+            if (!_viewModel.Configurations.Any(c => c.Id == _draft.Id))
+            {
+                LoadDraft(_source.Current as ContentCommunicationConfiguration);
+                return;
+            }
+
             _updating = true;
             Result result;
-            try { result = _viewModel.DeleteConfiguration(_draft.Id); }
-            finally { _updating = false; }
-            if (!result.IsSuccess) { ShowError(result.Message); return; }
+            try
+            {
+                result = _viewModel.DeleteConfiguration(_draft.Id);
+            }
+            finally
+            {
+                _updating = false;
+            }
+
+            if (!result.IsSuccess)
+            {
+                ShowError(result.Message);
+                return;
+            }
+
             LoadDraft(_source.Current as ContentCommunicationConfiguration);
         }
 
@@ -256,16 +325,27 @@ namespace FrmViews.Views
             {
                 var result = await operation();
                 if (IsDisposed) return;
-                if (result.IsSuccess) AppendLog(success); else ShowError(result.Message);
+                if (result.IsSuccess) AppendLog(success);
+                else ShowError(result.Message);
             }
-            catch (Exception ex) { if (!IsDisposed) ShowError(ex.Message); }
+            catch (Exception ex)
+            {
+                if (!IsDisposed) ShowError(ex.Message);
+            }
             finally
             {
                 _busy = false;
                 if (!IsDisposed)
                 {
-                    var saved = _draft == null ? null : _viewModel.Configurations.FirstOrDefault(c => c.Id == _draft.Id);
-                    if (saved != null && !_dirty) { _draft.AutoStart = saved.AutoStart; _editor.Refresh(); }
+                    var saved = _draft == null
+                        ? null
+                        : _viewModel.Configurations.FirstOrDefault(c => c.Id == _draft.Id);
+                    if (saved != null && !_dirty)
+                    {
+                        _draft.AutoStart = saved.AutoStart;
+                        _editor.Refresh();
+                    }
+
                     UpdateButtons();
                 }
             }
@@ -280,17 +360,21 @@ namespace FrmViews.Views
             _save.Enabled = _delete.Enabled = selected && !_busy && !running;
             _start.Enabled = selected && !_busy && (!running || _viewModel.GetStatus(_draft.Id) == "已断开");
             _stop.Enabled = selected && !_dirty && (running || _draft.AutoStart) && !_busy
-                && _viewModel.Configurations.Any(c => c.Id == _draft.Id);
-            bool tcp = selected && (_draft.Type == ContentCommunicationType.TCPSERVICE || _draft.Type == ContentCommunicationType.TCPCLIENT);
-            _send.Enabled = tcp && running && !_busy;
-            _sendText.Enabled = tcp && !_busy;
-            _status.Text = selected ? (_dirty ? "未保存 · " : "") + _draft.Name + " · " + _viewModel.GetStatus(_draft.Id)
+                            && _viewModel.Configurations.Any(c => c.Id == _draft.Id);
+            bool textTransport = selected && (_draft.Type == ContentCommunicationType.TCPSERVICE ||
+                                              _draft.Type == ContentCommunicationType.TCPCLIENT ||
+                                              _draft.Type == ContentCommunicationType.SERIALPORT);
+            _send.Enabled = textTransport && running && !_busy;
+            _sendText.Enabled = textTransport && !_busy;
+            _status.Text = selected
+                ? (_dirty ? "未保存 · " : "") + _draft.Name + " · " + _viewModel.GetStatus(_draft.Id)
                 : "新增通讯配置后保存，再点击启动。关闭此窗口后通讯继续运行。";
         }
 
         private void ReceiveMessage(string id, string text)
         {
-            EnqueueMessage(new ReceivedMessage { Id = id, Text = text.Length > 4000 ? text.Substring(0, 4000) + "…" : text });
+            EnqueueMessage(new ReceivedMessage
+                { Id = id, Text = text.Length > 4000 ? text.Substring(0, 4000) + "…" : text });
         }
 
         private void ReceiveBytes(string id, byte[] bytes)
@@ -313,20 +397,29 @@ namespace FrmViews.Views
             UpdateButtons();
             _list.Invalidate();
             var pending = new List<ReceivedMessage>();
-            lock (_messages) { for (int i = 0; i < 50 && _messages.Count > 0; i++) pending.Add(_messages.Dequeue()); }
+            lock (_messages)
+            {
+                for (int i = 0; i < 50 && _messages.Count > 0; i++) pending.Add(_messages.Dequeue());
+            }
+
             foreach (var message in pending)
             {
                 var configuration = _viewModel.Configurations.FirstOrDefault(c => c.Id == message.Id);
-                string prefix = message.Time.ToString("HH:mm:ss") + " [" + (configuration == null ? message.Id : configuration.Name) + "] ";
+                string prefix = message.Time.ToString("HH:mm:ss") + " [" +
+                                (configuration == null ? message.Id : configuration.Name) + "] ";
                 if (message.Bytes != null)
                 {
                     if (_showHex.Checked)
-                        AppendLog(prefix + "接收 HEX (" + message.Bytes.Length + " B)：" + BitConverter.ToString(message.Bytes).Replace('-', ' '));
+                        AppendLog(prefix + "接收 HEX (" + message.Bytes.Length + " B)：" +
+                                  BitConverter.ToString(message.Bytes).Replace('-', ' '));
                     continue;
                 }
+
                 bool invalid = message.Text.IndexOf('\uFFFD') >= 0;
-                AppendLog(prefix + "接收文本 (" + (configuration == null ? "" : configuration.EncodingName) + ")：" + EscapeText(message.Text));
-                if (invalid) AppendLog("提示：文本包含无法解码的字符，请核对发送端编码；GBK/GB2312 文本请选择 gb2312，二进制数据请查看原始 HEX。修改编码需停止、保存后重新启动。");
+                AppendLog(prefix + "接收文本 (" + (configuration == null ? "" : configuration.EncodingName) + ")：" +
+                          EscapeText(message.Text));
+                if (invalid)
+                    AppendLog("提示：文本包含无法解码的字符，请核对发送端编码；GBK/GB2312 文本请选择 gb2312，二进制数据请查看原始 HEX。修改编码需停止、保存后重新启动。");
             }
         }
 
@@ -347,6 +440,7 @@ namespace FrmViews.Views
                         break;
                 }
             }
+
             return display.ToString();
         }
 
@@ -357,17 +451,30 @@ namespace FrmViews.Views
             public byte[] Bytes;
             public DateTime Time = DateTime.Now;
         }
+
         private void AppendLog(string text)
         {
             if (_log.TextLength > 32000) _log.Text = _log.Text.Substring(_log.TextLength - 16000);
             _log.AppendText(text + Environment.NewLine);
         }
-        private void ShowError(string message) { AppendLog("失败：" + message); MessageBox.Show(this, message, Text, MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+
+        private void ShowError(string message)
+        {
+            AppendLog("失败：" + message);
+            MessageBox.Show(this, message, Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
         private void OnClosing(object sender, FormClosingEventArgs e)
         {
-            if (_busy) { e.Cancel = true; return; }
+            if (_busy)
+            {
+                e.Cancel = true;
+                return;
+            }
+
             e.Cancel = !ConfirmDraft();
         }
+
         private void OnDisposed(object sender, EventArgs e)
         {
             _timer.Dispose();
@@ -381,23 +488,50 @@ namespace FrmViews.Views
         private sealed class ProtocolProperties : CustomTypeDescriptor
         {
             private readonly ContentCommunicationConfiguration _configuration;
-            public ProtocolProperties(ContentCommunicationConfiguration configuration) { _configuration = configuration; }
-            public override object GetPropertyOwner(PropertyDescriptor pd) { return _configuration; }
-            public override PropertyDescriptorCollection GetProperties() { return GetProperties(null); }
+
+            public ProtocolProperties(ContentCommunicationConfiguration configuration)
+            {
+                _configuration = configuration;
+            }
+
+            public override object GetPropertyOwner(PropertyDescriptor pd)
+            {
+                return _configuration;
+            }
+
+            public override PropertyDescriptorCollection GetProperties()
+            {
+                return GetProperties(null);
+            }
+
             public override PropertyDescriptorCollection GetProperties(Attribute[] attributes)
             {
                 var names = new List<string> { "Name", "AutoStart" };
                 var type = _configuration.Type;
-                if (type != ContentCommunicationType.MODBUSRTU) names.Add("Port");
                 if (type == ContentCommunicationType.TCPSERVICE || type == ContentCommunicationType.TCPCLIENT)
                 {
+                    names.Add("Port");
                     names.AddRange(new[] { "Host", "EncodingName", "ReceiveLogEnabled" });
                     if (type == ContentCommunicationType.TCPCLIENT)
                         names.AddRange(new[] { "ConnectTimeout", "AutoReconnect", "ReconnectInterval" });
                 }
-                else names.AddRange(new[] { "Station", "DataFormat" });
-                if (type == ContentCommunicationType.MODBUSRTU) names.AddRange(new[] { "SerialPort", "BaudRate", "DataBits", "Parity", "StopBits" });
-                return new PropertyDescriptorCollection(TypeDescriptor.GetProperties(_configuration).Cast<PropertyDescriptor>()
+                else if (type == ContentCommunicationType.SERIALPORT)
+                {
+                    names.AddRange(new[]
+                    {
+                        "SerialPort", "BaudRate", "DataBits", "Parity", "StopBits", "ReceiveIdleMilliseconds", "EncodingName", "ReceiveLogEnabled"
+                    });
+                }
+                else
+                {
+                    if (type == ContentCommunicationType.MODBUSTCP) names.Add("Port");
+                    names.AddRange(new[] { "Station", "DataFormat" });
+                    if (type == ContentCommunicationType.MODBUSRTU)
+                        names.AddRange(new[] { "SerialPort", "BaudRate", "DataBits", "Parity", "StopBits" });
+                }
+
+                return new PropertyDescriptorCollection(TypeDescriptor.GetProperties(_configuration)
+                    .Cast<PropertyDescriptor>()
                     .Where(p => names.Contains(p.Name)).ToArray(), true);
             }
         }
