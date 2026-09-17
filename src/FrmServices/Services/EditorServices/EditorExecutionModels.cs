@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using FrmServices.Communication;
+using FrmServices.Services.CommunicationServices;
 using ST.Library.UI.NodeEditor;
 
 namespace FrmServices.Services.EditorServices
@@ -50,6 +51,10 @@ namespace FrmServices.Services.EditorServices
         public Guid ExecutionId { get; private set; }
         public CancellationToken CancellationToken { get; }
         public Func<string, PlcFrmVpCommunication> PlcResolver { get; set; }
+        public Func<string, ContentTcpServer> TcpServerResolver { get; set; }
+        public Func<string, ContentTcpClient> TcpClientResolver { get; set; }
+        public Func<string, ContentModbusTcpServer> ModbusTcpServerResolver { get; set; }
+        public Func<string, ContentModbusRtuServer> ModbusRtuServerResolver { get; set; }
         public Func<string, LightSourceFrmVpCommunication> LightSourceResolver { get; set; }
         public Func<int> NodeTransitionDelayMillisecondsProvider { get; set; }
         public Func<int> SuccessfulCycleDelayMillisecondsProvider { get; set; }
@@ -59,6 +64,14 @@ namespace FrmServices.Services.EditorServices
         public IDictionary<string, object> Items { get; }
         public bool StopOnFailure { get; set; }
         public int MaxSteps { get; set; }
+
+        internal Action<string> NodeProgressReporter { get; set; }
+
+        // 由执行节点同步调用；编辑器将事件marshalling到其UI线程。
+        public void ReportNodeProgress(string message)
+        {
+            NodeProgressReporter?.Invoke(message ?? string.Empty);
+        }
 
         public bool IsInputActivated(STNodeOption input)
         {
@@ -91,6 +104,50 @@ namespace FrmServices.Services.EditorServices
             if (lightSource == null)
                 throw new InvalidOperationException("未找到光源通讯实例：" + normalizedKey + "。");
             return lightSource;
+        }
+
+        public ContentTcpServer ResolveTcpServer(string key)
+        {
+            string normalizedKey = RequireKey(key, "TCP 服务端");
+            if (TcpServerResolver == null)
+                throw new InvalidOperationException("未配置内置 TCP 服务端解析器。");
+            var server = TcpServerResolver(normalizedKey);
+            if (server == null)
+                throw new InvalidOperationException("未找到 TCP 服务端：" + normalizedKey + "。");
+            return server;
+        }
+
+        public ContentTcpClient ResolveTcpClient(string key)
+        {
+            string normalizedKey = RequireKey(key, "TCP 客户端");
+            if (TcpClientResolver == null)
+                throw new InvalidOperationException("未配置内置 TCP 客户端解析器。");
+            var client = TcpClientResolver(normalizedKey);
+            if (client == null)
+                throw new InvalidOperationException("未找到 TCP 客户端：" + normalizedKey + "。");
+            return client;
+        }
+
+        public ContentModbusTcpServer ResolveModbusTcpServer(string key)
+        {
+            string normalizedKey = RequireKey(key, "Modbus TCP 服务端");
+            if (ModbusTcpServerResolver == null)
+                throw new InvalidOperationException("未配置内置 Modbus TCP 服务端解析器。");
+            var server = ModbusTcpServerResolver(normalizedKey);
+            if (server == null)
+                throw new InvalidOperationException("未找到 Modbus TCP 服务端：" + normalizedKey + "。");
+            return server;
+        }
+
+        public ContentModbusRtuServer ResolveModbusRtuServer(string key)
+        {
+            string normalizedKey = RequireKey(key, "Modbus RTU 服务端");
+            if (ModbusRtuServerResolver == null)
+                throw new InvalidOperationException("未配置内置 Modbus RTU 服务端解析器。");
+            var server = ModbusRtuServerResolver(normalizedKey);
+            if (server == null)
+                throw new InvalidOperationException("未找到 Modbus RTU 服务端：" + normalizedKey + "。");
+            return server;
         }
 
         internal void BeginExecution()
@@ -201,6 +258,10 @@ namespace FrmServices.Services.EditorServices
             return new EditorExecutionContext(CancellationToken)
             {
                 PlcResolver = PlcResolver,
+                TcpServerResolver = TcpServerResolver,
+                TcpClientResolver = TcpClientResolver,
+                ModbusTcpServerResolver = ModbusTcpServerResolver,
+                ModbusRtuServerResolver = ModbusRtuServerResolver,
                 LightSourceResolver = LightSourceResolver,
                 NodeTransitionDelayMillisecondsProvider =
                     NodeTransitionDelayMillisecondsProvider,

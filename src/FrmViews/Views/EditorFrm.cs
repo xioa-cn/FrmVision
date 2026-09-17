@@ -97,6 +97,12 @@ namespace FrmViews.Views
             nodeEditorPannel.AddSTNode(typeof(PlcWriteTransmitNode));
             nodeEditorPannel.AddSTNode(typeof(LightSourceNode));
 
+            // 内置通讯
+            nodeEditorPannel.AddSTNode(typeof(CoCommTcpSerNode));
+            nodeEditorPannel.AddSTNode(typeof(CoCommTcpCliNode));
+            nodeEditorPannel.AddSTNode(typeof(CoCommModTcpSerNode));
+            nodeEditorPannel.AddSTNode(typeof(CoCommModRtuSerNode));
+
             // 视觉图像
             nodeEditorPannel.AddSTNode(typeof(CameraNode));
             nodeEditorPannel.AddSTNode(typeof(VisionNode));
@@ -286,7 +292,7 @@ namespace FrmViews.Views
                         ? Color.FromArgb(34, 197, 94)
                         : Color.FromArgb(239, 68, 68)
                     : Color.FromArgb(250, 204, 21);
-                node.RuntimeText = progress.IsCompleted
+                node.RuntimeText = progress.IsCompleted || !string.IsNullOrWhiteSpace(progress.RuntimeValueText)
                     ? progress.RuntimeValueText
                     : "运行中...";
             }
@@ -296,7 +302,8 @@ namespace FrmViews.Views
                 : progress.NodeTitle;
             if (!progress.IsCompleted)
             {
-                SetStatus("运行中：" + name, Color.FromArgb(36, 99, 235));
+                SetStatus("运行中：" + name + (string.IsNullOrWhiteSpace(progress.Message)
+                    ? string.Empty : " · " + progress.Message), Color.FromArgb(36, 99, 235));
                 return;
             }
 

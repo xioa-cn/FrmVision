@@ -125,6 +125,7 @@ namespace FrmServices.ViewModel
                 // new NavigationMenuItemViewModel(MainMenuKeys.Registration, "软件注册"),
                 new NavigationMenuItemViewModel(MainMenuKeys.Communication, "通讯"
                 ),
+                new NavigationMenuItemViewModel(MainMenuKeys.ContentCommunication,"内置通讯"),
                 new NavigationMenuItemViewModel(MainMenuKeys.Users, "用户管理",
                     children: new[]
                     {

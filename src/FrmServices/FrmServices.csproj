@@ -117,6 +117,16 @@
     <Compile Include="Communication\LightSource\TcpLightSourceImpl.cs" />
     <Compile Include="Communication\PlcFrmVpCommunication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CommunicationServices\ContentModbusRtuServer.cs" />
+    <Compile Include="Services\CommunicationServices\ContentModbusServer.cs" />
+    <Compile Include="Services\CommunicationServices\ContentModbusTcpServer.cs" />
+    <Compile Include="Services\CommunicationServices\ContentTcpClient.cs" />
+    <Compile Include="Services\CommunicationServices\ContentTcpServer.cs" />
+    <Compile Include="Services\CommunicationServices\ContentUdpClient.cs" />
+    <Compile Include="Services\CommunicationServices\ContentUdpServer.cs" />
+    <Compile Include="Services\CommunicationServices\OriginalSerialPort.cs" />
+    <Compile Include="Services\CommunicationServices\TcpTextConnection.cs" />
+    <Compile Include="Services\CommunicationServices\Services\IContentServer.cs" />
     <Compile Include="Services\EditorServices\EditorExecutionModels.cs" />
     <Compile Include="Services\EditorServices\EditorTask.cs" />
     <Compile Include="Services\ParameterCatalogService.cs" />
@@ -130,6 +140,7 @@
     <Compile Include="Utils\PictureUtils.cs" />
     <Compile Include="ViewModel\CameraPanelViewModel.cs" />
     <Compile Include="ViewModel\CommunicationFrmViewModel.cs" />
+    <Compile Include="ViewModel\ContentCommunicationViewModel.cs" />
     <Compile Include="ViewModel\DeviceStatusViewModel.cs" />
     <Compile Include="ViewModel\EditorViewModel.cs" />
     <Compile Include="ViewModel\HslAuthorizationViewModel.cs" />

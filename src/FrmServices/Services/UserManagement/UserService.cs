@@ -241,9 +241,10 @@ namespace FrmServices.Services.UserManagement
                 .Where(item => item.Id == id).FirstOrDefaultAsync();
         }
 
-        private Task<UserAccount> FindByUserNameAsync(string userName)
+        private async Task<UserAccount> FindByUserNameAsync(string userName)
         {
-            return _database.Table<UserAccount>()
+            // var allUser = await _database.Table<UserAccount>().ToListAsync();
+            return await _database.Table<UserAccount>()
                 .Where(item => item.UserName == userName).FirstOrDefaultAsync();
         }
 

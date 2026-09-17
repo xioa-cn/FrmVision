@@ -164,6 +164,10 @@
     <Compile Include="Nodes\CalcNumNode.cs" />
     <Compile Include="Nodes\CameraNode.cs" />
     <Compile Include="Nodes\CharacterMergingNode.cs" />
+    <Compile Include="Nodes\CoCommModRtuSerNode.cs" />
+    <Compile Include="Nodes\CoCommModTcpSerNode.cs" />
+    <Compile Include="Nodes\CoCommTcpCliNode.cs" />
+    <Compile Include="Nodes\CoCommTcpSerNode.cs" />
     <Compile Include="Nodes\ComparisonNode.cs" />
     <Compile Include="Nodes\CompensationNode.cs" />
     <Compile Include="Nodes\EndNode.cs" />
@@ -177,6 +181,7 @@
     <Compile Include="Nodes\PlcValueTransmitNode.cs" />
     <Compile Include="Nodes\PlcWriteItemsPropertyDescriptor.cs" />
     <Compile Include="Nodes\PlcWriteTransmitNode.cs" />
+    <Compile Include="Nodes\RandomNode.cs" />
     <Compile Include="Nodes\RecipeNode.cs" />
     <Compile Include="Nodes\ReplaceNode.cs" />
     <Compile Include="Nodes\SaveImageNode.cs" />
@@ -201,6 +206,12 @@
     </Compile>
     <Compile Include="Views\CommunicationFrm.Designer.cs">
       <DependentUpon>CommunicationFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContentCommunication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ContentCommunication.Designer.cs">
+      <DependentUpon>ContentCommunication.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\HslAuthorizationFrm.cs">
       <SubType>Form</SubType>

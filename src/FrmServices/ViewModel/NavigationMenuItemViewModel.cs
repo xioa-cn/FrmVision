@@ -37,6 +37,7 @@ namespace FrmServices.ViewModel
         public const string Register = "Register";
         public const string UserManager = "UserManager";
         public const string HslCommunication = "HslCommunication";
+        public const string ContentCommunication = "ContentClient";
     }
 
     public sealed class NavigationMenuItemViewModel : ObservableObject

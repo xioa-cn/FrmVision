@@ -41,6 +41,8 @@ namespace FrmViews
         private int _pendingSuccessfulWorkflowCycles;
         private string _pendingWorkflowStatus;
         private EditorFrm _editorFrm;
+        private ContentCommunicationViewModel _contentCommunicationViewModel;
+        private Task _contentCommunicationStartupTask;
 
         public MainFrm() : base(false, true)
         {
@@ -99,6 +101,8 @@ namespace FrmViews
             statusBarControl.Bind(ViewModel);
             ApplyCurrentUser();
             navigationControl.SetActivePage(ViewModel.SelectedPageIndex);
+            _contentCommunicationViewModel = new ContentCommunicationViewModel();
+            _contentCommunicationStartupTask = RestoreInternalCommunicationsAsync();
             _ = LoadToolsAsync();
             _ = TryAutoLoginAsync();
             (ViewModel as ObservableObject).PropertyChanged += ViewModelOnPropertyChanged;
@@ -154,12 +158,41 @@ namespace FrmViews
 
             BindMenuCommand(MainMenuKeys.HslCommunication,
                 ShowHslAuthorization);
-
+            BindMenuCommand(MainMenuKeys.ContentCommunication,ShowContentCommunication);
             BindMenuCommand(MainMenuKeys.Login, ShowUserLogin);
             BindMenuCommand(MainMenuKeys.Register, ShowUserRegister);
             BindMenuCommand(MainMenuKeys.UserManager, ShowUserManager);
             BindMenuCommand(MainMenuKeys.Parameters, ShowRecipeApplication);
             BindMenuCommand(MainMenuKeys.StorageSettings, ShowStorageSettings);
+        }
+
+        private void ShowContentCommunication()
+        {
+            if (!EnsureEngineerPermission("内部通讯配置")) return;
+            if (_contentCommunicationViewModel == null)
+                _contentCommunicationViewModel = new ContentCommunicationViewModel();
+            using (var form = new ContentCommunication(_contentCommunicationViewModel))
+                form.ShowDialog(this);
+        }
+
+        private async Task RestoreInternalCommunicationsAsync()
+        {
+            try
+            {
+                var result = await Task.Run(() => _contentCommunicationViewModel.RestoreStartedCommunicationsAsync());
+                if (IsDisposed || Disposing || _closePending) return;
+                if (!result.IsSuccess)
+                {
+                    ViewModel.StatusMessage = "内部通讯自动启动失败，请查看日志或内置通讯配置。";
+                    AppLog.Error("内部通讯自动启动失败：" + Environment.NewLine + result.Message, nameof(MainFrm));
+                }
+                else AppLog.Info("内部通讯启动状态已恢复。", nameof(MainFrm));
+            }
+            catch (Exception ex)
+            {
+                if (!IsDisposed && !Disposing && !_closePending)
+                    AppLog.Error("恢复内部通讯失败：" + ex, nameof(MainFrm));
+            }
         }
 
         private void BindMenuCommand(string menuKey, Action action)
@@ -471,6 +504,9 @@ namespace FrmViews
                 if (IsDisposed || Disposing) return;
 
                 ViewModel.RefreshToolMenuStates();
+                if (_contentCommunicationStartupTask != null)
+                    await _contentCommunicationStartupTask;
+                if (IsDisposed || Disposing || _closePending) return;
                 await Task.Run(() => ViewModel.CommunicationFrmViewModel
                     .BuildRuntimeCommunications());
                 if (IsDisposed || Disposing)
@@ -531,6 +567,10 @@ namespace FrmViews
             var context = new EditorExecutionContext(cancellationToken)
             {
                 PlcResolver = communication.ResolvePlc,
+                TcpServerResolver = key => _contentCommunicationViewModel.ResolveTcpServer(key),
+                TcpClientResolver = key => _contentCommunicationViewModel.ResolveTcpClient(key),
+                ModbusTcpServerResolver = key => _contentCommunicationViewModel.ResolveModbusTcpServer(key),
+                ModbusRtuServerResolver = key => _contentCommunicationViewModel.ResolveModbusRtuServer(key),
                 LightSourceResolver = communication.ResolveLightSource,
                 NodeTransitionDelayMillisecondsProvider = () =>
                     Volatile.Read(ref _workflowNodeTransitionDelayMilliseconds),
@@ -902,7 +942,10 @@ namespace FrmViews
             if (_communicationDisposalStarted) return;
             _communicationDisposalStarted = true;
             _communicationDisposalTask = Task.Run(() =>
-                ViewModel.CommunicationFrmViewModel.DisposeRuntimeCommunications());
+            {
+                try { _contentCommunicationViewModel?.Dispose(); }
+                finally { ViewModel.CommunicationFrmViewModel.DisposeRuntimeCommunications(); }
+            });
         }
 
         private void MainFrmOnDisposed(object sender, EventArgs e)

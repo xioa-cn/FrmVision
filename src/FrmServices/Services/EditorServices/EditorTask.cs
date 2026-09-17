@@ -233,6 +233,8 @@ namespace FrmServices.Services.EditorServices
             OnNodeExecutionChanged(flowStartNodeGuid, node, false, true,
                 string.Empty, string.Empty);
             EditorNodeExecutionResult nodeResult;
+            context.NodeProgressReporter = message => OnNodeExecutionChanged(
+                flowStartNodeGuid, node, false, true, message, message);
             try
             {
                 context.CancellationToken.ThrowIfCancellationRequested();
@@ -249,6 +251,10 @@ namespace FrmServices.Services.EditorServices
             {
                 nodeResult = EditorNodeExecutionResult.Failure(
                     ex.GetBaseException().Message);
+            }
+            finally
+            {
+                context.NodeProgressReporter = null;
             }
             stopwatch.Stop();
 
