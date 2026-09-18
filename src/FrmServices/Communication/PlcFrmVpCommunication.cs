@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.NetworkInformation;
+using FrmCommon.LogServices;
 using FrmMapper.Data;
 using FrmServices.Communication.Extensions;
 using HslCommunication.Core.Device;
@@ -20,6 +21,7 @@ namespace FrmServices.Communication
 
         public Result<T[]> Read<T>(string url, ushort length)
         {
+            if (!CommunicationAccessGuard.IsAllowed) return new Result<T[]> { IsSuccess = false, Message = CommunicationAccessGuard.FailureMessage };
             var result = deviceCommunication.ReadAnyType<T>(url, length);
             ConnectSuccess = result.IsSuccess;
             return new Result<T[]>()
@@ -32,6 +34,7 @@ namespace FrmServices.Communication
 
         public Result Write<T>(string address, T data)
         {
+            if (!CommunicationAccessGuard.IsAllowed) return Result.Fail(CommunicationAccessGuard.FailureMessage);
             var result = deviceCommunication.WriteAny(address, data);
             ConnectSuccess = result.IsSuccess;
             return Result.Ok(result.IsSuccess, result.Message);
@@ -56,6 +59,7 @@ namespace FrmServices.Communication
 
         public Result Connect()
         {
+            if (!CommunicationAccessGuard.IsAllowed) return Result.Fail(CommunicationAccessGuard.FailureMessage);
             Result result;
             switch (deviceCommunication)
             {

@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using FrmCommon.LogServices;
 using FrmMapper.Data;
 using FrmServices.LogServices;
 using FrmServices.Services.CommunicationServices.Services;
@@ -68,6 +69,7 @@ public class ContentTcpServer : IContentServer
     // Called by workflow workers, never by the WinForms UI thread.
     public string ReadMessage(int timeoutMilliseconds, CancellationToken cancellationToken)
     {
+        CommunicationAccessGuard.EnsureAllowed();
         if (timeoutMilliseconds < 0) throw new ArgumentOutOfRangeException(nameof(timeoutMilliseconds));
         cancellationToken.ThrowIfCancellationRequested();
         var elapsed = Stopwatch.StartNew();
@@ -100,6 +102,7 @@ public class ContentTcpServer : IContentServer
 
     public Result Start()
     {
+        if (!CommunicationAccessGuard.IsAllowed) return Result.Fail(CommunicationAccessGuard.FailureMessage);
         lock (_syncRoot)
         {
             if (_disposed) return Result.Fail("The TCP server has been disposed.");
@@ -126,6 +129,7 @@ public class ContentTcpServer : IContentServer
     // Sends the same text to every client that is connected at the time of this call.
     public async Task Send(string msg)
     {
+        CommunicationAccessGuard.EnsureAllowed();
         if (msg == null) throw new ArgumentNullException(nameof(msg));
         TcpTextConnection[] clients;
         lock (_syncRoot)

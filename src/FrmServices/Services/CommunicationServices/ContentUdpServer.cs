@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using FrmCommon.LogServices;
 using FrmMapper.Data;
 using FrmServices.LogServices;
 using FrmServices.Services.CommunicationServices.Services;
@@ -66,6 +67,7 @@ public class ContentUdpServer : IContentServer
     // Consumes one decoded UDP datagram. Each datagram is one application chunk.
     public string ReadMessage(int timeoutMilliseconds, CancellationToken cancellationToken)
     {
+        CommunicationAccessGuard.EnsureAllowed();
         if (timeoutMilliseconds < 0) throw new ArgumentOutOfRangeException(nameof(timeoutMilliseconds));
         cancellationToken.ThrowIfCancellationRequested();
         var elapsed = Stopwatch.StartNew();
@@ -98,6 +100,7 @@ public class ContentUdpServer : IContentServer
 
     public Result Start()
     {
+        if (!CommunicationAccessGuard.IsAllowed) return Result.Fail(CommunicationAccessGuard.FailureMessage);
         lock (_syncRoot)
         {
             if (_disposed) return Result.Fail("The UDP server has been disposed.");
@@ -127,6 +130,7 @@ public class ContentUdpServer : IContentServer
     // Sends the same datagram to every remote that has sent data since this listen session started.
     public async Task Send(string msg)
     {
+        CommunicationAccessGuard.EnsureAllowed();
         if (msg == null) throw new ArgumentNullException(nameof(msg));
         UdpClient client;
         IPEndPoint[] remotes;

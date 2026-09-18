@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using FrmCommon.LogServices;
 using FrmMapper.Data;
 using FrmServices.LogServices;
 
@@ -50,6 +51,7 @@ public class TcpLightSourceImpl : ILightSourceService, IDisposable
 
     public Result Send(string message)
     {
+        if (!CommunicationAccessGuard.IsAllowed) return Result.Fail(CommunicationAccessGuard.FailureMessage);
         if (string.IsNullOrEmpty(message))
             return Result.Fail("发送内容不能为空");
 
@@ -62,6 +64,7 @@ public class TcpLightSourceImpl : ILightSourceService, IDisposable
 
     public Result Connect()
     {
+        if (!CommunicationAccessGuard.IsAllowed) return Result.Fail(CommunicationAccessGuard.FailureMessage);
         lock (_lifecycleRoot)
         {
             lock (_syncRoot)
@@ -115,6 +118,7 @@ public class TcpLightSourceImpl : ILightSourceService, IDisposable
 
     public Result KeepAlive()
     {
+        if (!CommunicationAccessGuard.IsAllowed) return Result.Fail(CommunicationAccessGuard.FailureMessage);
         var socket = GetCurrentSocket();
         if (socket == null)
             return Result.Fail("TCP 未连接");

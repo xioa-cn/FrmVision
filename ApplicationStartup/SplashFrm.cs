@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FrmCommon;
 using FrmCommon.ConfigUtils;
+using FrmCommon.LogServices;
 using FrmViews;
 
 namespace ApplicationStartup
@@ -74,6 +75,22 @@ namespace ApplicationStartup
 
             try
             {
+                bool authorValid;
+                try
+                {
+                    using (var statusBar = new FrmViews.Controls.MachineStatusBarControl())
+                        authorValid = CommunicationAccessGuard.Initialize(statusBar);
+                }
+                catch
+                {
+                    authorValid = CommunicationAccessGuard.Initialize(null);
+                }
+                if (!authorValid)
+                {
+                    FrmServices.LogServices.AppLog.Error(CommunicationAccessGuard.FailureMessage);
+                    MessageBox.Show(this, CommunicationAccessGuard.FailureMessage,
+                        "通讯已禁用", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
                 SetStartupStage(16, "正在读取系统配置");
                 await Task.Run((Action)GlobalConfig.Initialize);
 

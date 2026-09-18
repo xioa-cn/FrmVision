@@ -1,4 +1,5 @@
 using System;
+using FrmCommon.LogServices;
 using FrmMapper.Data;
 using FrmServices.Communication.Extensions;
 using FrmServices.Services.CommunicationServices.Services;
@@ -40,6 +41,7 @@ public abstract class ContentModbusServer : IContentNodeServer
 
     public Result Start()
     {
+        if (!CommunicationAccessGuard.IsAllowed) return Result.Fail(CommunicationAccessGuard.FailureMessage);
         lock (_syncRoot)
         {
             if (_disposed) return Result.Fail("The Modbus server has been disposed.");
@@ -73,6 +75,7 @@ public abstract class ContentModbusServer : IContentNodeServer
     // The local data area remains accessible before Start and after Stop.
     public Result<T[]> Read<T>(string adress, short length)
     {
+        if (!CommunicationAccessGuard.IsAllowed) return new Result<T[]> { IsSuccess = false, Message = CommunicationAccessGuard.FailureMessage };
         lock (_syncRoot)
         {
             if (_disposed) return ReadFailure<T>("The Modbus server has been disposed.");
@@ -98,6 +101,7 @@ public abstract class ContentModbusServer : IContentNodeServer
 
     public Result Write<T>(string adress, T value)
     {
+        if (!CommunicationAccessGuard.IsAllowed) return Result.Fail(CommunicationAccessGuard.FailureMessage);
         lock (_syncRoot)
         {
             if (_disposed) return Result.Fail("The Modbus server has been disposed.");

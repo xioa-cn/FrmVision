@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.NetworkInformation;
+using FrmCommon.LogServices;
 using FrmMapper.Data;
 
 namespace FrmServices.Communication
@@ -60,6 +61,7 @@ namespace FrmServices.Communication
 
         private Result CheckConnection()
         {
+            if (!CommunicationAccessGuard.IsAllowed) return Result.Fail(CommunicationAccessGuard.FailureMessage);
             try
             {
                 var pingCam = _ping.Send(_Ip, _timeout);

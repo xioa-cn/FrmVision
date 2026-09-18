@@ -1,4 +1,5 @@
 ﻿using System;
+using FrmCommon.LogServices;
 using FrmMapper.Data;
 using FrmServices.Communication.LightSource;
 
@@ -22,6 +23,7 @@ namespace FrmServices.Communication
 
         public Result Write<T>(string adress, T data)
         {
+            if (!CommunicationAccessGuard.IsAllowed) return Result.Fail(CommunicationAccessGuard.FailureMessage);
             if (data is string str)
             {
                 var result = lightSourceService.Send(str);
@@ -51,6 +53,7 @@ namespace FrmServices.Communication
 
         public Result Connect()
         {
+            if (!CommunicationAccessGuard.IsAllowed) return Result.Fail(CommunicationAccessGuard.FailureMessage);
             try
             {
                 var result = lightSourceService.Connect();
@@ -66,6 +69,7 @@ namespace FrmServices.Communication
 
         public void KeepAlive()
         {
+            if (!CommunicationAccessGuard.IsAllowed) { ConnectSuccess = false; return; }
             try
             {
                 var result = lightSourceService.KeepAlive();

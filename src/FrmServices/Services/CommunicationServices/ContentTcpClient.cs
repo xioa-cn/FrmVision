@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using FrmCommon.LogServices;
 using FrmMapper.Data;
 using FrmServices.Services.CommunicationServices.Services;
 
@@ -69,6 +70,7 @@ public class ContentTcpClient : IContentServer
     // Reads survive automatic reconnect, but never a manual stop/start session boundary.
     public string ReadMessage(CancellationToken cancellationToken, Action<bool> connectionStateChanged = null)
     {
+        CommunicationAccessGuard.EnsureAllowed();
         cancellationToken.ThrowIfCancellationRequested();
         using (cancellationToken.Register(() => { lock (_syncRoot) Monitor.PulseAll(_syncRoot); }))
         {
@@ -116,6 +118,7 @@ public class ContentTcpClient : IContentServer
 
     public Task<Result> StartAsync()
     {
+        if (!CommunicationAccessGuard.IsAllowed) return Task.FromResult(Result.Fail(CommunicationAccessGuard.FailureMessage));
         lock (_syncRoot)
         {
             if (_disposed) return Task.FromResult(Result.Fail("The TCP client has been disposed."));
@@ -142,6 +145,7 @@ public class ContentTcpClient : IContentServer
 
     private async Task<Result> ConnectOnceAsync(TaskCompletionSource<bool> session)
     {
+        if (!CommunicationAccessGuard.IsAllowed) return Result.Fail(CommunicationAccessGuard.FailureMessage);
         await _startLock.WaitAsync().ConfigureAwait(false);
         TcpClient client = null;
         try
@@ -213,6 +217,7 @@ public class ContentTcpClient : IContentServer
 
     public async Task Send(string msg)
     {
+        CommunicationAccessGuard.EnsureAllowed();
         if (msg == null) throw new ArgumentNullException(nameof(msg));
         TcpTextConnection connection;
         lock (_syncRoot)

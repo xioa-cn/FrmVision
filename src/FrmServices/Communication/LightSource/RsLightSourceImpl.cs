@@ -1,5 +1,6 @@
 using System;
 using System.IO.Ports;
+using FrmCommon.LogServices;
 using FrmMapper.Data;
 using FrmServices.LogServices;
 
@@ -39,6 +40,7 @@ public class RsLightSourceImpl : ILightSourceService, IDisposable
 
     public Result Send(string message)
     {
+        if (!CommunicationAccessGuard.IsAllowed) return Result.Fail(CommunicationAccessGuard.FailureMessage);
         if (string.IsNullOrEmpty(message))
             return Result.Fail("发送内容不能为空");
         if (!IsConnected)
@@ -57,6 +59,7 @@ public class RsLightSourceImpl : ILightSourceService, IDisposable
 
     public Result Connect()
     {
+        if (!CommunicationAccessGuard.IsAllowed) return Result.Fail(CommunicationAccessGuard.FailureMessage);
         if (IsConnected)
             return Result.Ok();
 
@@ -73,6 +76,7 @@ public class RsLightSourceImpl : ILightSourceService, IDisposable
 
     public Result KeepAlive()
     {
+        if (!CommunicationAccessGuard.IsAllowed) return Result.Fail(CommunicationAccessGuard.FailureMessage);
         return IsConnected
             ? Result.Ok()
             : Result.Fail("串口未连接");

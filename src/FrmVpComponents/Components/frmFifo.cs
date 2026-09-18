@@ -2,6 +2,7 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using Cognex.VisionPro;
+using FrmCommon.LogServices;
 
 namespace FrmVpComponents
 {
@@ -13,6 +14,7 @@ namespace FrmVpComponents
 
         public frmFifo()
         {
+            CommunicationAccessGuard.EnsureAllowed();
             InitializeComponent();
         }
 

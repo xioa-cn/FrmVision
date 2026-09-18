@@ -5,6 +5,7 @@ using System.IO.Ports;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using FrmCommon.LogServices;
 using FrmMapper.Data;
 using FrmServices.LogServices;
 using FrmServices.Services.CommunicationServices.Services;
@@ -75,6 +76,7 @@ public class OriginalSerialPort : IContentServer
     // Consumes one decoded serial chunk. The serial byte stream does not define application frames.
     public string ReadMessage(int timeoutMilliseconds, CancellationToken cancellationToken)
     {
+        CommunicationAccessGuard.EnsureAllowed();
         if (timeoutMilliseconds < 0) throw new ArgumentOutOfRangeException(nameof(timeoutMilliseconds));
         cancellationToken.ThrowIfCancellationRequested();
         var elapsed = System.Diagnostics.Stopwatch.StartNew();
@@ -112,6 +114,7 @@ public class OriginalSerialPort : IContentServer
 
     public async Task<Result> StartAsync()
     {
+        if (!CommunicationAccessGuard.IsAllowed) return Result.Fail(CommunicationAccessGuard.FailureMessage);
         await _startLock.WaitAsync().ConfigureAwait(false);
         try
         {
@@ -174,6 +177,7 @@ public class OriginalSerialPort : IContentServer
 
     public async Task Send(string msg)
     {
+        CommunicationAccessGuard.EnsureAllowed();
         if (msg == null) throw new ArgumentNullException(nameof(msg));
         SerialPort port;
         lock (_syncRoot)

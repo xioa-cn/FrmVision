@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using Cognex.VisionPro;
 using Cognex.VisionPro.ToolBlock;
+using FrmCommon.LogServices;
 using FrmServices.LogServices;
 
 
@@ -86,6 +87,7 @@ namespace FrmVpComponents.Services
         /// </summary>
         public Dictionary<string, CogAcqFifoTool> GetCogAcqFifo(string productionName)
         {
+            CommunicationAccessGuard.EnsureAllowed();
             var productionKey = NormalizeKey(productionName, nameof(productionName));
             _toolsLock.EnterReadLock();
             try
@@ -135,6 +137,7 @@ namespace FrmVpComponents.Services
             string productionName, string toolName,
             Func<CogAcqFifoTool, TResult> action)
         {
+            CommunicationAccessGuard.EnsureAllowed();
             if (action == null) throw new ArgumentNullException(nameof(action));
             return UseTool(_toolsModel.Cameras, productionName,
                 toolName, action, "相机工具");
@@ -415,6 +418,7 @@ namespace FrmVpComponents.Services
         private static Dictionary<string, TTool> LoadTools<TTool>(string toolFileDir, string toolType)
             where TTool : class, IDisposable
         {
+            if (typeof(TTool) == typeof(CogAcqFifoTool)) CommunicationAccessGuard.EnsureAllowed();
             if (string.IsNullOrWhiteSpace(toolFileDir))
                 throw new ArgumentException("工具目录不能为空。", nameof(toolFileDir));
 
