@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -399,8 +399,8 @@ namespace ST.Library.UI.NodeEditor
                     DataObject data = new DataObject();
                     data.SetData("STNodeTypeName", false,
                         nodeType.AssemblyQualifiedName);
-                    data.SetData("STNodeType", false, nodeType);
-                    data.SetData(typeof(Type), nodeType);
+                    data.SetData(DataFormats.UnicodeText, false,
+                        "FrmVision.STNode:" + nodeType.AssemblyQualifiedName);
                     this.DoDragDrop(data, DragDropEffects.Copy);
                     return;
                 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -366,6 +366,7 @@ namespace FrmViews.Views
             bool textTransport = selected && (_draft.Type == ContentCommunicationType.TCPSERVICE ||
                                               _draft.Type == ContentCommunicationType.TCPCLIENT ||
                                               _draft.Type == ContentCommunicationType.UDPSERVICE ||
+                                              _draft.Type == ContentCommunicationType.UDPCLIENT ||
                                               _draft.Type == ContentCommunicationType.SERIALPORT);
             _send.Enabled = textTransport && running && !_busy;
             _sendText.Enabled = textTransport && !_busy;
@@ -515,7 +516,7 @@ namespace FrmViews.Views
             {
                 var names = new List<string> { "Name", "AutoStart" };
                 var type = _configuration.Type;
-                if (type == ContentCommunicationType.TCPSERVICE || type == ContentCommunicationType.TCPCLIENT || type == ContentCommunicationType.UDPSERVICE)
+                if (type == ContentCommunicationType.TCPSERVICE || type == ContentCommunicationType.TCPCLIENT || type == ContentCommunicationType.UDPSERVICE || type == ContentCommunicationType.UDPCLIENT)
                 {
                     names.Add("Port");
                     names.AddRange(new[] { "Host", "EncodingName", "ReceiveLogEnabled" });

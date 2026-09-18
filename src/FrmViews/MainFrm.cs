@@ -575,6 +575,7 @@ namespace FrmViews
                 ModbusRtuServerResolver = key => _contentCommunicationViewModel.ResolveModbusRtuServer(key),
                 SerialPortResolver = key => _contentCommunicationViewModel.ResolveSerialPort(key),
                 UdpServerResolver = key => _contentCommunicationViewModel.ResolveUdpServer(key),
+                UdpClientResolver = key => _contentCommunicationViewModel.ResolveUdpClient(key),
                 LightSourceResolver = communication.ResolveLightSource,
                 NodeTransitionDelayMillisecondsProvider = () =>
                     Volatile.Read(ref _workflowNodeTransitionDelayMilliseconds),

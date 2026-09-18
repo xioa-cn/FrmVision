@@ -169,6 +169,7 @@
     <Compile Include="Nodes\CoCommSerialNode.cs" />
     <Compile Include="Nodes\CoCommTcpCliNode.cs" />
     <Compile Include="Nodes\CoCommTcpSerNode.cs" />
+    <Compile Include="Nodes\CoCommUdpCliNode.cs" />
     <Compile Include="Nodes\CoCommUdpSerNode.cs" />
     <Compile Include="Nodes\ComparisonNode.cs" />
     <Compile Include="Nodes\CompensationNode.cs" />

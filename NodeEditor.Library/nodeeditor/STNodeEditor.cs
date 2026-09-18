@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -1025,23 +1025,27 @@ namespace ST.Library.UI.NodeEditor
 
         private static Type GetDraggedNodeType(IDataObject data) {
             if (data == null) return null;
-            object typeName = data.GetDataPresent("STNodeTypeName")
-                ? data.GetData("STNodeTypeName")
-                : null;
-            string assemblyQualifiedName = typeName as string;
-            if (!string.IsNullOrWhiteSpace(assemblyQualifiedName)) {
-                Type resolvedType = Type.GetType(assemblyQualifiedName, false);
-                if (resolvedType != null) return resolvedType;
+            try {
+                string name = data.GetData("STNodeTypeName", false) as string;
+                if (string.IsNullOrWhiteSpace(name)) {
+                    const string prefix = "FrmVision.STNode:";
+                    string text = data.GetData(DataFormats.UnicodeText, false) as string;
+                    if (text != null && text.StartsWith(prefix, StringComparison.Ordinal))
+                        name = text.Substring(prefix.Length);
+                }
+                Type type = !string.IsNullOrWhiteSpace(name) ? Type.GetType(name, false) : null;
+                if (type == null) {
+                    type = data.GetData("STNodeType", false) as Type
+                        ?? data.GetData(typeof(Type)) as Type;
+                }
+                return type != null && type.IsSubclassOf(typeof(STNode)) && !type.IsAbstract
+                    && !type.ContainsGenericParameters && type.GetConstructor(Type.EmptyTypes) != null
+                    ? type : null;
+            } catch (Exception) {
+                // Invalid or unavailable OLE data is not an accepted node drag.
+                return null;
             }
-
-            object value = data.GetDataPresent("STNodeType")
-                ? data.GetData("STNodeType")
-                : null;
-            if (!(value is Type) && data.GetDataPresent(typeof(Type)))
-                value = data.GetData(typeof(Type));
-            return value as Type;
         }
-
         #region protected ----------------------------------------------------------------------------------------------------
         /// <summary>
         /// 当绘制背景网格线时候发生

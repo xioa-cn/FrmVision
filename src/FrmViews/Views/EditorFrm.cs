@@ -108,6 +108,7 @@ namespace FrmViews.Views
             nodeEditorPannel.AddSTNode(typeof(CoCommTcpCliNode));
             nodeEditorPannel.AddSTNode(typeof(CoCommSerialNode));
             nodeEditorPannel.AddSTNode(typeof(CoCommUdpSerNode));
+            nodeEditorPannel.AddSTNode(typeof(CoCommUdpCliNode));
             nodeEditorPannel.AddSTNode(typeof(CoCommModTcpSerNode));
             nodeEditorPannel.AddSTNode(typeof(CoCommModRtuSerNode));
 
