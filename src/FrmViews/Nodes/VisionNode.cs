@@ -44,7 +44,7 @@ namespace FrmViews.Nodes
         public string Message { get; set; }
     }
 
-    [STNode("视觉图像", "xioa", null, null,
+    [STNode("视觉图像", "xioa", "1327916255@qq.com", "https://github.com/xioa-cn/",
         "Result 满足用户配置的条件时，输出指定的视觉工具结果值。")]
     // 作者：xioa
     // 作者邮箱：1327916255@qq.com

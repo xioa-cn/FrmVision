@@ -20,7 +20,7 @@ namespace FrmViews.Nodes
         public string Message { get; set; }
     }
 
-    [STNode("视觉图像", "xioa", null, null,
+    [STNode("视觉图像", "xioa", "1327916255@qq.com", "https://github.com/xioa-cn/",
         "运行指定的 VisionPro 相机工具，并将 ICogImage 输出给后续节点。")]
     // 作者：xioa
     // 作者邮箱：1327916255@qq.com

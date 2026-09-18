@@ -120,7 +120,7 @@ namespace FrmViews.Nodes
         public string Message { get; set; }
     }
 
-    [STNode("数据处理", "xioa", null, null,
+    [STNode("数据处理", "xioa", "1327916255@qq.com", "https://github.com/xioa-cn/",
         "对单个数值输入按配置顺序执行多步加、减、乘、除，并输出最终结果。")]
     // 作者：xioa
     // 作者邮箱：1327916255@qq.com

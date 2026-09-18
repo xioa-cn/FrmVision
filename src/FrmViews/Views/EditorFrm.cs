@@ -57,6 +57,8 @@ namespace FrmViews.Views
             _workflowRuntime = workflowRuntime;
             _lightSourceResolver = lightSourceResolver;
             InitializeComponent();
+            nodeEditorPannel.PropertyGrid.ShowMail = true;
+            nodeEditorPannel.PropertyGrid.ShowLink = true;
             InitializeNodeEditor();
         }
 

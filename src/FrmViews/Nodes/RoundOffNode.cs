@@ -23,7 +23,7 @@ namespace FrmViews.Nodes
         public string Message { get; set; }
     }
 
-    [STNode("数据处理", "xioa", null, null,
+    [STNode("数据处理", "xioa", "1327916255@qq.com", "https://github.com/xioa-cn/",
         "把输入数值取整后输出，可选择向上取整或向下取整。")]
     // 作者：xioa
     // 作者邮箱：1327916255@qq.com

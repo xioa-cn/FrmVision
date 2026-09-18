@@ -4,7 +4,7 @@ using ST.Library.UI.NodeEditor;
 
 namespace FrmViews.Nodes
 {
-    [STNode("流程控制", "xioa", null, null,
+    [STNode("流程控制", "xioa", "1327916255@qq.com", "https://github.com/xioa-cn/",
         "将本轮输入原样输出，用于让下游节点比同级分支晚一拍执行。")]
     // 作者：xioa
     // 作者邮箱：1327916255@qq.com

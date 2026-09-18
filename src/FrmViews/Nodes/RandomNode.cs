@@ -28,7 +28,7 @@ namespace FrmViews.Nodes
         public string Message { get; set; }
     }
 
-    [STNode("数据处理", "xioa", null, null,
+    [STNode("数据处理", "xioa", "1327916255@qq.com", "https://github.com/xioa-cn/",
         "生成指定范围内的随机数；可选择与输入数字进行加、减、乘、除运算，" +
         "也可不参考输入直接输出随机数。")]
     // 作者：xioa

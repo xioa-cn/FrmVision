@@ -4,7 +4,7 @@ using FrmServices.Services.EditorServices;
 
 namespace FrmViews.Nodes
 {
-    [STNode("流程控制", "xioa", null, null,
+    [STNode("流程控制", "xioa", "1327916255@qq.com", "https://github.com/xioa-cn/",
         "流程的起始节点，只提供可连接多个后续节点的输出端口。")]
     // 作者：xioa
     // 作者邮箱：1327916255@qq.com

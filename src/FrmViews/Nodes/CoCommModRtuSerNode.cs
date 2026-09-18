@@ -7,7 +7,7 @@ using ST.Library.UI.NodeEditor;
 
 namespace FrmViews.Nodes
 {
-    [STNode("内置通讯", "xioa", null, null,
+    [STNode("内置通讯", "xioa", "1327916255@qq.com", "https://github.com/xioa-cn/",
         "读取或写入内置 Modbus RTU 服务端的数据区，与外部 Modbus 客户端共享线圈和寄存器数据。")]
     // 作者：xioa
     // 作者邮箱：1327916255@qq.com

@@ -10,7 +10,7 @@ namespace FrmViews.Nodes
     public enum TcpServerOperationMode { Read, Write }
     public enum TcpServerWriteValueSource { Input, FixedValue }
 
-    [STNode("内置通讯", "xioa", null, null,
+    [STNode("内置通讯", "xioa", "1327916255@qq.com", "https://github.com/xioa-cn/",
         "读取内置 TCP 服务端收到的文本并传递，或向连接的客户端发送输入值 / 固定文本。")]
     // 作者：xioa
     // 作者邮箱：1327916255@qq.com

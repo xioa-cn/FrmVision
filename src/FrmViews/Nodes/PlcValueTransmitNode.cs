@@ -16,7 +16,7 @@ namespace FrmViews.Nodes
         public string Message { get; set; }
     }
 
-    [STNode("设备通讯", "xioa", null, null,
+    [STNode("设备通讯", "xioa", "1327916255@qq.com", "https://github.com/xioa-cn/",
         "读取指定 PLC 点位，并将读取值输出给下一个节点。")]
     // 作者：xioa
     // 作者邮箱：1327916255@qq.com

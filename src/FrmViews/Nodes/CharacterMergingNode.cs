@@ -17,7 +17,7 @@ namespace FrmViews.Nodes
         public string Message { get; set; }
     }
 
-    [STNode("数据处理", "xioa", null, null,
+    [STNode("数据处理", "xioa", "1327916255@qq.com", "https://github.com/xioa-cn/",
         "将两个输入转换为字符串，并按字符串 1 + 字符串 2 的顺序合并输出。")]
     // 作者：xioa
     // 作者邮箱：1327916255@qq.com

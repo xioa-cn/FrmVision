@@ -14,7 +14,7 @@ namespace FrmViews.Nodes
         public string Message { get; set; }
     }
 
-    [STNode("逻辑判断", "xioa", null, null,
+    [STNode("逻辑判断", "xioa", "1327916255@qq.com", "https://github.com/xioa-cn/",
         "对一个 bool 输入值取反，并输出取反后的 bool 值。")]
     // 作者：xioa
     // 作者邮箱：1327916255@qq.com

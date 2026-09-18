@@ -21,7 +21,7 @@ namespace FrmViews.Nodes
         public string Message { get; set; }
     }
 
-    [STNode("流程控制", "xioa", null, null,
+    [STNode("流程控制", "xioa", "1327916255@qq.com", "https://github.com/xioa-cn/",
         "切换指定产品配方下的相机工具和视觉工具，输入和输出均支持多连接。")]
     // 作者：xioa
     // 作者邮箱：1327916255@qq.com

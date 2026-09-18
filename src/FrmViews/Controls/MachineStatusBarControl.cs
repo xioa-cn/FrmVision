@@ -15,8 +15,47 @@ namespace FrmViews.Controls
         public MachineStatusBarControl()
         {
             InitializeComponent();
+            InitializeAuthorLabel();
             devicePanel.SizeChanged += (sender, args) => AdjustDeviceBadgeWidths();
             Disposed += (sender, args) => DetachDevices();
+        }
+
+        private void InitializeAuthorLabel()
+        {
+            var centerLayout = new TableLayoutPanel
+            {
+                Dock = DockStyle.Fill,
+                Margin = Padding.Empty,
+                Padding = Padding.Empty,
+                ColumnCount = 3,
+                RowCount = 1
+            };
+            centerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 234F));
+            centerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
+            centerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            centerLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+
+            var authorLabel = new Label
+            {
+                Name = "authorLabel",
+                Dock = DockStyle.Fill,
+                Margin = Padding.Empty,
+                AutoEllipsis = true,
+                ForeColor = System.Drawing.Color.FromArgb(148, 163, 184),
+                TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                Text = "\u0046\u0072\u006D\u0056\u0069\u0073\u0069\u006F\u006E"
+                    + "\u0020\u00A9\u0020\u0020\u4F5C\u8005\uFF1A\u0078\u0069\u006F\u0061",
+                UseMnemonic = false
+            };
+
+            rootLayout.SuspendLayout();
+            rootLayout.Controls.Remove(devicePanel);
+            centerLayout.Controls.Add(devicePanel, 0, 0);
+            centerLayout.Controls.Add(authorLabel, 1, 0);
+            rootLayout.Controls.Add(centerLayout, 1, 0);
+            rootLayout.ResumeLayout(true);
+            centerLayout.SizeChanged += (sender, args) => AdjustDeviceBadgeWidths();
+            AdjustDeviceBadgeWidths();
         }
 
         public void Bind(MainFrmViewModel viewModel)
@@ -102,6 +141,18 @@ namespace FrmViews.Controls
         private void AdjustDeviceBadgeWidths()
         {
             var count = devicePanel.Controls.Count;
+            var centerLayout = devicePanel.Parent as TableLayoutPanel;
+            if (centerLayout != null && centerLayout.ClientSize.Width > 0)
+            {
+                float deviceShare = Math.Min(centerLayout.ClientSize.Width,
+                    Math.Max(centerLayout.ClientSize.Width * 0.3F, count * 78F));
+                if (Math.Abs(centerLayout.ColumnStyles[0].Width - deviceShare) > 0.01F)
+                {
+                    centerLayout.SuspendLayout();
+                    centerLayout.ColumnStyles[0].Width = deviceShare;
+                    centerLayout.ResumeLayout(true);
+                }
+            }
             if (count == 0 || devicePanel.ClientSize.Width <= 0) return;
 
             const int horizontalMargin = 2;
