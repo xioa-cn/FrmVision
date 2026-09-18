@@ -25,8 +25,43 @@ namespace ApplicationStartup
         public SplashFrm()
         {
             InitializeComponent();
+            InitializeAuthorNotice();
             versionLabel.Text = "版本 " + GetDisplayVersion();
             UpdateProgressVisuals();
+        }
+
+        private void InitializeAuthorNotice()
+        {
+            var noticeLabel = new Label
+            {
+                Name = "authorNoticeLabel",
+                Dock = DockStyle.Bottom,
+                AutoSize = false,
+                ForeColor = Color.FromArgb(71, 85, 105),
+                BackColor = Color.White,
+                Font = Font,
+                Padding = new Padding(productTypeLabel.Left, 0,
+                    productTypeLabel.Left, Font.Height),
+                Text = "作者：xioa  |  Apache License 2.0\r\n"
+                    + "反对盗版及冒名发布；引用或转载需注明 FrmVision 及原作者。\r\n"
+                    + "不可恶意删除、篡改或遮挡作者信息。\r\n"
+                    + "项目出处：https://github.com/xioa-cn/FrmVision",
+                TextAlign = ContentAlignment.TopLeft,
+                UseMnemonic = false
+            };
+
+            int textWidth = Math.Max(1,
+                brandPanel.ClientSize.Width - noticeLabel.Padding.Horizontal);
+            Size textSize = TextRenderer.MeasureText(noticeLabel.Text,
+                noticeLabel.Font, new Size(textWidth, int.MaxValue),
+                TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix);
+            noticeLabel.Height = textSize.Height + noticeLabel.Padding.Vertical;
+
+            // 根据实际字体测量结果扩展窗口，保留原有品牌区和启动进度布局。
+            ClientSize = new Size(ClientSize.Width,
+                ClientSize.Height + noticeLabel.Height);
+            brandPanel.Controls.Add(noticeLabel);
+            noticeLabel.BringToFront();
         }
 
         private async void SplashFrmOnShown(object sender, EventArgs e)
@@ -56,7 +91,7 @@ namespace ApplicationStartup
                         ? "通讯组件授权成功"
                         : "通讯组件尚未授权，将以受限模式启动");
 
-                await Task.Delay(120);
+                await Task.Delay(2500);
                 SetStartupStage(86, "正在创建主工作区");
                 _mainForm = new MainFrm();
 
