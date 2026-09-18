@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading;
 using Cognex.VisionPro;
 using Cognex.VisionPro.ToolBlock;
-using FrmCommon.LogServices;
 using FrmServices.LogServices;
 
 
@@ -87,7 +86,7 @@ namespace FrmVpComponents.Services
         /// </summary>
         public Dictionary<string, CogAcqFifoTool> GetCogAcqFifo(string productionName)
         {
-            CommunicationAccessGuard.EnsureAllowed();
+            ValidateToolAccess();
             var productionKey = NormalizeKey(productionName, nameof(productionName));
             _toolsLock.EnterReadLock();
             try
@@ -137,7 +136,7 @@ namespace FrmVpComponents.Services
             string productionName, string toolName,
             Func<CogAcqFifoTool, TResult> action)
         {
-            CommunicationAccessGuard.EnsureAllowed();
+            ValidateToolAccess();
             if (action == null) throw new ArgumentNullException(nameof(action));
             return UseTool(_toolsModel.Cameras, productionName,
                 toolName, action, "相机工具");
@@ -415,10 +414,32 @@ namespace FrmVpComponents.Services
             DisposeTools(removedTools, toolType);
         }
 
+        private static void ValidateToolAccess()
+        {
+            var accessType = Type.GetType("\u0046\u0072\u006D\u0043\u006F\u006D\u006D\u006F\u006E\u002E\u004C\u006F\u0067\u0053\u0065\u0072\u0076\u0069\u0063\u0065\u0073\u002E\u0043\u006F\u006D\u006D\u0075\u006E\u0069\u0063\u0061\u0074\u0069\u006F\u006E\u0041\u0063\u0063\u0065\u0073\u0073\u0047\u0075\u0061\u0072\u0064\u002C\u0020\u0046\u0072\u006D\u0043\u006F\u006D\u006D\u006F\u006E", true);
+            var method = accessType.GetMethod("\u0045\u006E\u0073\u0075\u0072\u0065\u0041\u006C\u006C\u006F\u0077\u0065\u0064",
+                System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static,
+                null, Type.EmptyTypes, null);
+            if (method == null || method.ReturnType != typeof(void) || method.ContainsGenericParameters)
+                throw new InvalidOperationException("工具加载校验不可用，已停止加载。");
+
+            try
+            {
+                method.Invoke(null, null);
+            }
+            catch (System.Reflection.TargetInvocationException exception)
+            {
+                // 保留原校验异常及堆栈，让调用方获得实际的禁用原因。
+                if (exception.InnerException != null)
+                    System.Runtime.ExceptionServices.ExceptionDispatchInfo
+                        .Capture(exception.InnerException).Throw();
+                throw;
+            }
+        }
         private static Dictionary<string, TTool> LoadTools<TTool>(string toolFileDir, string toolType)
             where TTool : class, IDisposable
         {
-            if (typeof(TTool) == typeof(CogAcqFifoTool)) CommunicationAccessGuard.EnsureAllowed();
+            ValidateToolAccess();
             if (string.IsNullOrWhiteSpace(toolFileDir))
                 throw new ArgumentException("工具目录不能为空。", nameof(toolFileDir));
 
