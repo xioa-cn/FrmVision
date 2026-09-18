@@ -363,6 +363,7 @@ namespace FrmViews.Views
                             && _viewModel.Configurations.Any(c => c.Id == _draft.Id);
             bool textTransport = selected && (_draft.Type == ContentCommunicationType.TCPSERVICE ||
                                               _draft.Type == ContentCommunicationType.TCPCLIENT ||
+                                              _draft.Type == ContentCommunicationType.UDPSERVICE ||
                                               _draft.Type == ContentCommunicationType.SERIALPORT);
             _send.Enabled = textTransport && running && !_busy;
             _sendText.Enabled = textTransport && !_busy;
@@ -508,7 +509,7 @@ namespace FrmViews.Views
             {
                 var names = new List<string> { "Name", "AutoStart" };
                 var type = _configuration.Type;
-                if (type == ContentCommunicationType.TCPSERVICE || type == ContentCommunicationType.TCPCLIENT)
+                if (type == ContentCommunicationType.TCPSERVICE || type == ContentCommunicationType.TCPCLIENT || type == ContentCommunicationType.UDPSERVICE)
                 {
                     names.Add("Port");
                     names.AddRange(new[] { "Host", "EncodingName", "ReceiveLogEnabled" });

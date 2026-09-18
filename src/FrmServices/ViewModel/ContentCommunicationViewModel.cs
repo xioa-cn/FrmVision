@@ -23,7 +23,8 @@ public enum ContentCommunicationType
     TCPCLIENT,
     MODBUSTCP,
     MODBUSRTU,
-    SERIALPORT
+    SERIALPORT,
+    UDPSERVICE
 }
 
 public sealed class ContentCommunicationConfiguration
@@ -37,7 +38,7 @@ public sealed class ContentCommunicationConfiguration
 
     [Browsable(false)] public ContentCommunicationType Type { get; set; }
 
-    [Category("网络"), DisplayName("IP / 主机名"), Description("TCP 服务端填写本地 IP，0.0.0.0 监听所有网卡；客户端填写远端 IP 或主机名。")]
+    [Category("网络"), DisplayName("IP / 主机名"), Description("TCP / UDP 服务端填写本地 IP，0.0.0.0 监听所有网卡；客户端填写远端 IP 或主机名。")]
     public string Host { get; set; } = "127.0.0.1";
 
     [Category("网络"), DisplayName("端口")] public int Port { get; set; } = 5000;
@@ -92,6 +93,7 @@ public sealed class ContentCommunicationConfiguration
             case ContentCommunicationType.MODBUSTCP: return "Modbus TCP 从站";
             case ContentCommunicationType.MODBUSRTU: return "Modbus RTU 从站";
             case ContentCommunicationType.SERIALPORT: return "原始串口";
+            case ContentCommunicationType.UDPSERVICE: return "UDP 服务端";
             default: return "未知协议";
         }
     }
@@ -146,7 +148,7 @@ public sealed class ContentCommunicationViewModel : IDisposable
         return new ContentCommunicationConfiguration
         {
             Name = prefix + " " + index, Type = type,
-            Host = type == ContentCommunicationType.TCPSERVICE ? "0.0.0.0" : "127.0.0.1",
+            Host = type == ContentCommunicationType.TCPSERVICE || type == ContentCommunicationType.UDPSERVICE ? "0.0.0.0" : "127.0.0.1",
             Port = type == ContentCommunicationType.MODBUSTCP ? 502 : 5000
         };
     }
@@ -210,20 +212,21 @@ public sealed class ContentCommunicationViewModel : IDisposable
         if (string.IsNullOrWhiteSpace(c.Name)) return "名称不能为空。";
         if (!Enum.IsDefined(typeof(ContentCommunicationType), c.Type)) return "不支持该通讯类型。";
         bool tcp = c.Type == ContentCommunicationType.TCPSERVICE || c.Type == ContentCommunicationType.TCPCLIENT;
+        bool udp = c.Type == ContentCommunicationType.UDPSERVICE;
         bool serial = c.Type == ContentCommunicationType.SERIALPORT;
         bool modbus = c.Type == ContentCommunicationType.MODBUSTCP || c.Type == ContentCommunicationType.MODBUSRTU;
         if (!serial && c.Type != ContentCommunicationType.MODBUSRTU && (c.Port < 1 || c.Port > 65535))
             return "端口范围必须为 1–65535。";
-        if (tcp)
+        if (tcp || udp)
         {
             if (string.IsNullOrWhiteSpace(c.Host)) return "IP / 主机名不能为空。";
-            if (c.Type == ContentCommunicationType.TCPSERVICE && !IPAddress.TryParse(c.Host.Trim(), out _))
-                return "TCP 服务端必须填写有效的本地 IP。";
+            if ((c.Type == ContentCommunicationType.TCPSERVICE || udp) && !IPAddress.TryParse(c.Host.Trim(), out _))
+                return "服务端必须填写有效的本地 IP。";
             if (c.Type == ContentCommunicationType.TCPCLIENT && c.ConnectTimeout <= 0) return "连接超时必须大于 0。";
             if (c.Type == ContentCommunicationType.TCPCLIENT && c.ReconnectInterval <= 0) return "重连间隔必须大于 0。";
         }
 
-        if (tcp || serial)
+        if (tcp || udp || serial)
         {
             try
             {
@@ -414,6 +417,9 @@ public sealed class ContentCommunicationViewModel : IDisposable
             case ContentCommunicationType.SERIALPORT:
                 tcp = new OriginalSerialPort(c.SerialPort, c.BaudRate, c.DataBits, c.Parity, c.StopBits,
                     Encoding.GetEncoding(c.EncodingName), c.ReceiveIdleMilliseconds);
+                break;
+            case ContentCommunicationType.UDPSERVICE:
+                tcp = new ContentUdpServer(c.Port, c.Host, Encoding.GetEncoding(c.EncodingName));
                 break;
             case ContentCommunicationType.MODBUSTCP:
                 return new ContentModbusTcpServer(c.Port, (byte)c.Station,
@@ -608,6 +614,23 @@ public sealed class ContentCommunicationViewModel : IDisposable
         configuration.AutoStart = enabled;
     }
 
+    public ContentUdpServer ResolveUdpServer(string key)
+    {
+        lock (_sync)
+        {
+            EnsureAvailable();
+            string normalized = (key ?? string.Empty).Trim();
+            if (normalized.Length == 0) throw new InvalidOperationException("UDP 服务端名称不能为空。");
+            var configuration = Configurations.FirstOrDefault(c => string.Equals(c.Id, normalized, StringComparison.OrdinalIgnoreCase))
+                ?? Configurations.FirstOrDefault(c => string.Equals(c.Name, normalized, StringComparison.OrdinalIgnoreCase));
+            if (configuration == null) throw new InvalidOperationException("未找到内置通讯配置：" + normalized + "。");
+            if (configuration.Type != ContentCommunicationType.UDPSERVICE)
+                throw new InvalidOperationException("通讯“" + configuration.Name + "”不是 UDP 服务端。");
+            if (!_runtimes.TryGetValue(configuration.Id, out var runtime) || !(runtime is ContentUdpServer server) || !server.IsStarted)
+                throw new InvalidOperationException("UDP 服务端“" + configuration.Name + "”未启动，请先启动内置通讯。");
+            return server;
+        }
+    }
     public string GetStatus(string id)
     {
         lock (_sync)
@@ -618,6 +641,7 @@ public sealed class ContentCommunicationViewModel : IDisposable
             if (runtime is ContentTcpClient client && client.IsRunning && !client.IsStarted) return "重连中";
             if (!IsStarted(runtime)) return "已断开";
             if (runtime is ContentTcpServer server) return "监听中 / 客户端 " + server.ClientCount;
+            if (runtime is ContentUdpServer udpServer) return "监听中 / 远端 " + udpServer.RemoteCount;
             if (runtime is OriginalSerialPort) return "已打开";
             return runtime is ContentTcpClient ? "已连接" : "运行中";
         }

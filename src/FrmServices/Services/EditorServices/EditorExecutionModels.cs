@@ -56,6 +56,7 @@ namespace FrmServices.Services.EditorServices
         public Func<string, ContentModbusTcpServer> ModbusTcpServerResolver { get; set; }
         public Func<string, ContentModbusRtuServer> ModbusRtuServerResolver { get; set; }
         public Func<string, OriginalSerialPort> SerialPortResolver { get; set; }
+        public Func<string, ContentUdpServer> UdpServerResolver { get; set; }
         public Func<string, LightSourceFrmVpCommunication> LightSourceResolver { get; set; }
         public Func<int> NodeTransitionDelayMillisecondsProvider { get; set; }
         public Func<int> SuccessfulCycleDelayMillisecondsProvider { get; set; }
@@ -162,6 +163,16 @@ namespace FrmServices.Services.EditorServices
             return port;
         }
 
+        public ContentUdpServer ResolveUdpServer(string key)
+        {
+            string normalizedKey = RequireKey(key, "UDP 服务端");
+            if (UdpServerResolver == null)
+                throw new InvalidOperationException("未配置内置 UDP 服务端解析器。");
+            var server = UdpServerResolver(normalizedKey);
+            if (server == null)
+                throw new InvalidOperationException("未找到 UDP 服务端：" + normalizedKey + "。");
+            return server;
+        }
         internal void BeginExecution()
         {
             ExecutionId = Guid.NewGuid();
@@ -275,6 +286,7 @@ namespace FrmServices.Services.EditorServices
                 ModbusTcpServerResolver = ModbusTcpServerResolver,
                 ModbusRtuServerResolver = ModbusRtuServerResolver,
                 SerialPortResolver = SerialPortResolver,
+                UdpServerResolver = UdpServerResolver,
                 LightSourceResolver = LightSourceResolver,
                 NodeTransitionDelayMillisecondsProvider =
                     NodeTransitionDelayMillisecondsProvider,
