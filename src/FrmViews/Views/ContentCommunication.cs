@@ -12,6 +12,8 @@ using FrmViews.Controls;
 
 namespace FrmViews.Views
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public partial class ContentCommunication : Form
     {
         private readonly ContentCommunicationViewModel _viewModel;
@@ -445,6 +447,8 @@ namespace FrmViews.Views
             return display.ToString();
         }
 
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class ReceivedMessage
         {
             public string Id;
@@ -486,6 +490,8 @@ namespace FrmViews.Views
         }
 
         // Expose only fields used by the selected protocol, keeping the persisted DTO independent of WinForms.
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class ProtocolProperties : CustomTypeDescriptor
         {
             private readonly ContentCommunicationConfiguration _configuration;

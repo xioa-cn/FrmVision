@@ -12,6 +12,8 @@ namespace FrmViews.Nodes
 
     [STNode("内置通讯", "xioa", null, null,
         "读取内置 UDP 服务端收到的数据报并传递，或向已发过数据的远端发送输入值 / 固定文本。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class CoCommUdpSerNode : WorkflowNode, IEditorExecutableNode, IEditorNodeReadiness
     {
         public CoCommUdpSerNode()

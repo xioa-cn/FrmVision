@@ -17,6 +17,8 @@ using HslCommunication.Core.Device;
 
 namespace FrmServices.ViewModel;
 
+// 作者：xioa
+// 作者邮箱：1327916255@qq.com
 public class GlobalCommunicationModel
 {
     public GlobalCommunicationModel(ObservableCollection<PlcFrmVpCommunication> plcs,
@@ -40,6 +42,8 @@ public enum CommunicationDeviceType
     LightSource
 }
 
+// 作者：xioa
+// 作者邮箱：1327916255@qq.com
 public sealed class DeviceConnectionConfiguration
 {
     public string Name { get; set; }
@@ -96,6 +100,8 @@ public sealed class DeviceConnectionConfiguration
     public string StateText => Enabled ? "已启用" : "已停用";
 }
 
+// 作者：xioa
+// 作者邮箱：1327916255@qq.com
 public sealed class PlcProtocolParameterDefinition
 {
     internal PlcProtocolParameterDefinition(string name, string displayName,
@@ -129,6 +135,8 @@ public sealed class PlcProtocolParameterDefinition
     }
 }
 
+// 作者：xioa
+// 作者邮箱：1327916255@qq.com
 public partial class CommunicationFrmViewModel : ObservableObject
 {
     private const int ConnectionMonitorIntervalMilliseconds = 1000;

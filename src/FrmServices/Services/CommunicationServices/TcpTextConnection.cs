@@ -8,6 +8,8 @@ using FrmServices.LogServices;
 
 namespace FrmServices.Services.CommunicationServices;
 
+// 作者：xioa
+// 作者邮箱：1327916255@qq.com
 internal sealed class TcpTextConnection : IDisposable
 {
     private readonly TcpClient _client;

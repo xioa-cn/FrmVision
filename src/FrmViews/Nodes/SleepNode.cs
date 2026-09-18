@@ -7,6 +7,8 @@ namespace FrmViews.Nodes
 {
     [STNode("流程控制", "xioa", null, null,
         "等待指定的毫秒数后，将本轮输入原样输出给下一个节点。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class SleepNode : WorkflowNode, IEditorExecutableNode,
         IEditorNodeReadiness
     {

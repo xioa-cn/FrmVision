@@ -20,6 +20,8 @@ namespace FrmViews.Nodes
         String
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class ComparisonNodeExecutionResult
     {
         public bool IsSuccess { get; set; }
@@ -33,6 +35,8 @@ namespace FrmViews.Nodes
 
     [STNode("逻辑判断", "xioa", null, null,
         "比较两个输入值，并根据比较结果从 True 或 False 端口继续流程。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class ComparisonNode : WorkflowNode, IEditorExecutableNode,
         IEditorNodeReadiness
     {
@@ -178,6 +182,8 @@ namespace FrmViews.Nodes
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class ComparisonOperatorPropertyDescriptor :
         STNodePropertyDescriptor
     {

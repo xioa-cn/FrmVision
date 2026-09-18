@@ -3,6 +3,8 @@ using FrmServices.Services.EditorServices;
 
 namespace FrmViews.Nodes
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public abstract class WorkflowNode : STNode, IEditorLoggableNode
     {
         private string _nodeName = string.Empty;

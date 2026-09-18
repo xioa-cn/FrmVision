@@ -11,6 +11,8 @@ namespace FrmServices.Services.UserManagement
         Administrator = 3
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public static class UserRoles
     {
         public const string Administrator = "管理员";
@@ -49,6 +51,8 @@ namespace FrmServices.Services.UserManagement
     }
 
     [Table("Users")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class UserAccount
     {
         [PrimaryKey, AutoIncrement]
@@ -72,6 +76,8 @@ namespace FrmServices.Services.UserManagement
         public DateTime? LastLoginAt { get; set; }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class UserInfo
     {
         public int Id { get; set; }
@@ -83,6 +89,8 @@ namespace FrmServices.Services.UserManagement
         public DateTime? LastLoginAt { get; set; }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class UserOperationException : Exception
     {
         public UserOperationException(string message) : base(message)

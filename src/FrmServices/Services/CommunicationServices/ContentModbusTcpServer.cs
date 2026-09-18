@@ -5,6 +5,8 @@ using HslCommunication.Core;
 
 namespace FrmServices.Services.CommunicationServices;
 
+// 作者：xioa
+// 作者邮箱：1327916255@qq.com
 public class ContentModbusTcpServer : ContentModbusServer
 {
     public ContentModbusTcpServer(int port = 502, byte station = 1, DataFormat dataFormat = DataFormat.CDAB)

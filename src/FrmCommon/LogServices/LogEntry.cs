@@ -11,6 +11,8 @@ namespace FrmServices.LogServices
         Critical = 4
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class LogEntry
     {
         public LogEntry(DateTime timestamp, LogLevel level, string message, string source = null)
@@ -44,12 +46,16 @@ namespace FrmServices.LogServices
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class LogEntryEventArgs : EventArgs
     {
         public LogEntryEventArgs(LogEntry entry) { Entry = entry; }
         public LogEntry Entry { get; }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class LogStorageErrorEventArgs : EventArgs
     {
         public LogStorageErrorEventArgs(Exception exception) { Exception = exception; }

@@ -8,6 +8,8 @@ using FrmViews.Nodes;
 
 namespace FrmViews.Views
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     internal sealed class CompensationStepEditorFrm : Form
     {
         private const string AddText = "加 (+)";

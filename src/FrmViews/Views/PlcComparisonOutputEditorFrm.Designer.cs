@@ -1,5 +1,7 @@
 namespace FrmViews.Views
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     partial class PlcComparisonOutputEditorFrm
     {
         private System.ComponentModel.IContainer components = null;

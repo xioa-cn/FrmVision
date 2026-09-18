@@ -5,6 +5,8 @@ using HslCommunication.Core;
 
 namespace FrmServices.Services.CommunicationServices;
 
+// 作者：xioa
+// 作者邮箱：1327916255@qq.com
 public class ContentModbusRtuServer : ContentModbusServer
 {
     public ContentModbusRtuServer(string portName = "COM4", int baudRate = 9600,

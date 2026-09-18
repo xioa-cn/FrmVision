@@ -12,6 +12,8 @@ namespace FrmViews.Nodes
         Floor
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class RounOffNodeExecutionResult
     {
         public bool IsSuccess { get; set; }
@@ -23,6 +25,8 @@ namespace FrmViews.Nodes
 
     [STNode("数据处理", "xioa", null, null,
         "把输入数值取整后输出，可选择向上取整或向下取整。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class RoundOffNode : WorkflowNode, IEditorExecutableNode,
         IEditorNodeReadiness
     {
@@ -157,6 +161,8 @@ namespace FrmViews.Nodes
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class RoundOffModePropertyDescriptor :
         STNodePropertyDescriptor
     {

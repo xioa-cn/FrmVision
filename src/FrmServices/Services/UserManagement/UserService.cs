@@ -9,6 +9,8 @@ using SQLite;
 
 namespace FrmServices.Services.UserManagement
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class UserService
     {
         public const int MinimumPasswordLength = 5;

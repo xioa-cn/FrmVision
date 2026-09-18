@@ -6,6 +6,8 @@ using ST.Library.UI.NodeEditor;
 
 namespace FrmViews.Nodes
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class PictureNodeExecutionResult
     {
         public bool IsSuccess { get; set; }
@@ -18,6 +20,8 @@ namespace FrmViews.Nodes
 
     [STNode("视觉图像", "xioa", null, null,
         "接收视觉子记录集合，并按索引显示到指定相机页面。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public class PictureNode : WorkflowNode, IEditorExecutableNode
     {
         public PictureNode()

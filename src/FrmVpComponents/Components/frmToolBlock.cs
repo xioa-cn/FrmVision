@@ -12,6 +12,8 @@ using FrmVpComponents.Utils;
 
 namespace FrmVpComponents
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public partial class frmToolBlock : Form
     {
         private string _fileName = string.Empty;

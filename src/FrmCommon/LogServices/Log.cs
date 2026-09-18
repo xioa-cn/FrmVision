@@ -13,6 +13,8 @@ using FrmCommon.Mvvm;
 
 namespace FrmServices.LogServices
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public partial class Log : ViewModelControl, IViewModelFrm<LogViewModel>
     {
         private static readonly Color PageColor = Color.FromArgb(245, 247, 250);
@@ -1199,6 +1201,8 @@ namespace FrmServices.LogServices
                 .Replace("\n", Environment.NewLine);
         }
 
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class LabeledField : Panel
         {
             private readonly Label _label;
@@ -1243,6 +1247,8 @@ namespace FrmServices.LogServices
             }
         }
 
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class RoundedSurfacePanel : Panel
         {
             private readonly int _radius;
@@ -1281,6 +1287,8 @@ namespace FrmServices.LogServices
             }
         }
 
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class StatusIndicator : Label
         {
             public StatusIndicator()
@@ -1310,6 +1318,8 @@ namespace FrmServices.LogServices
             }
         }
 
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class ModernButton : Button
         {
             private readonly string _iconGlyph;
@@ -1383,6 +1393,8 @@ namespace FrmServices.LogServices
             }
         }
 
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class ModernToggleButton : CheckBox
         {
             private bool _hovered;
@@ -1428,6 +1440,8 @@ namespace FrmServices.LogServices
             }
         }
 
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class LiveToolbar : Panel
         {
             private readonly Control _level;
@@ -1500,6 +1514,8 @@ namespace FrmServices.LogServices
             }
         }
 
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class HistoryToolbar : Panel
         {
             private readonly Control _from;
@@ -1578,6 +1594,8 @@ namespace FrmServices.LogServices
             }
         }
 
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class NavigationButton : Button
         {
             private bool _active;
@@ -1644,6 +1662,8 @@ namespace FrmServices.LogServices
             }
         }
 
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class LevelFilterItem
         {
             public LevelFilterItem(string text, LogLevel? level)
@@ -1656,6 +1676,8 @@ namespace FrmServices.LogServices
             public override string ToString() => Text;
         }
 
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class BufferedDataGridView : DataGridView
         {
             public BufferedDataGridView()

@@ -6,6 +6,8 @@ using FrmServices.ViewModel;
 
 namespace FrmServices.Utils;
 
+// 作者：xioa
+// 作者邮箱：1327916255@qq.com
 public class PictureUtils
 {
     private static ObservableCollection<CameraPanelViewModel> _allCamera;

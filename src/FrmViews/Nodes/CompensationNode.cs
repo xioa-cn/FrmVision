@@ -19,12 +19,16 @@ namespace FrmViews.Nodes
         Divide
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     internal sealed class CompensationStepDefinition
     {
         public CompensationOperation Operation { get; set; }
         public double Value { get; set; }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     internal static class CompensationStepSerializer
     {
         public static string Serialize(IEnumerable<CompensationStepDefinition> steps)
@@ -104,6 +108,8 @@ namespace FrmViews.Nodes
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class CompensationNodeExecutionResult
     {
         public bool IsSuccess { get; set; }
@@ -116,6 +122,8 @@ namespace FrmViews.Nodes
 
     [STNode("数据处理", "xioa", null, null,
         "对单个数值输入按配置顺序执行多步加、减、乘、除，并输出最终结果。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public class CompensationNode : WorkflowNode, IEditorExecutableNode,
         IEditorNodeReadiness
     {
@@ -262,6 +270,8 @@ namespace FrmViews.Nodes
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class CompensationStepsPropertyDescriptor :
         STNodePropertyDescriptor
     {

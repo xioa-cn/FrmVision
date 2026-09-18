@@ -27,6 +27,8 @@ namespace FrmViews.Nodes
         String
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class VisionNodeExecutionResult
     {
         public bool IsSuccess { get; set; }
@@ -44,6 +46,8 @@ namespace FrmViews.Nodes
 
     [STNode("视觉图像", "xioa", null, null,
         "Result 满足用户配置的条件时，输出指定的视觉工具结果值。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public class VisionNode : WorkflowNode, IEditorExecutableNode,
         IEditorNodeReadiness
     {
@@ -673,6 +677,8 @@ namespace FrmViews.Nodes
             }
         }
 
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class KeyOutput
         {
             public KeyOutput(string key, STNodeOption option)
@@ -685,6 +691,8 @@ namespace FrmViews.Nodes
             public STNodeOption Option { get; }
         }
 
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class KeyInput
         {
             public KeyInput(string key, STNodeOption option)
@@ -697,6 +705,8 @@ namespace FrmViews.Nodes
             public STNodeOption Option { get; }
         }
 
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class ResultCondition
         {
             public ResultCondition(char comparisonOperator,
@@ -712,6 +722,8 @@ namespace FrmViews.Nodes
             public string Label { get; }
         }
 
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class VisionToolExecutionData
         {
             public VisionToolExecutionData(object resultValue,
@@ -732,6 +744,8 @@ namespace FrmViews.Nodes
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class VisionInputKeysPropertyDescriptor :
         STNodePropertyDescriptor
     {
@@ -752,6 +766,8 @@ namespace FrmViews.Nodes
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class VisionOutputKeysPropertyDescriptor :
         STNodePropertyDescriptor
     {
@@ -770,6 +786,8 @@ namespace FrmViews.Nodes
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class VisionResultConditionsPropertyDescriptor :
         STNodePropertyDescriptor
     {

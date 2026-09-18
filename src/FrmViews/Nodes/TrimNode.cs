@@ -11,6 +11,8 @@ using ST.Library.UI.NodeEditor;
 
 namespace FrmViews.Nodes
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     internal static class TrimItemSerializer
     {
         public static string Serialize(IEnumerable<string> items)
@@ -61,6 +63,8 @@ namespace FrmViews.Nodes
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class TrimNodeExecutionResult
     {
         public bool IsSuccess { get; set; }
@@ -72,6 +76,8 @@ namespace FrmViews.Nodes
 
     [STNode("数据处理", "xioa", null, null,
         "按列表顺序从字符串首尾移除指定字符，并输出处理后的字符串。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class TrimNode : WorkflowNode, IEditorExecutableNode,
         IEditorNodeReadiness
     {
@@ -174,6 +180,8 @@ namespace FrmViews.Nodes
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class TrimItemsPropertyDescriptor : STNodePropertyDescriptor
     {
         protected override string GetStringFromValue()

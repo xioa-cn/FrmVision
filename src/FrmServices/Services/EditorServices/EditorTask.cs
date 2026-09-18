@@ -9,6 +9,8 @@ using ST.Library.UI.NodeEditor;
 
 namespace FrmServices.Services.EditorServices
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class EditorTask
     {
         private int _isExecuting;
@@ -431,6 +433,8 @@ namespace FrmServices.Services.EditorServices
                 isCanceled, message, steps.ToArray());
         }
 
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class NodeRunResult
         {
             private NodeRunResult(bool isCanceled,

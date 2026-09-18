@@ -14,6 +14,8 @@ namespace FrmVpComponents.Properties
 
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
     {
 

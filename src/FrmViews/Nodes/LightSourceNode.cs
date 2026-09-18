@@ -6,6 +6,8 @@ using ST.Library.UI.NodeEditor;
 
 namespace FrmViews.Nodes
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class LightSourceNodeExecutionResult
     {
         public bool IsSuccess { get; set; }
@@ -17,6 +19,8 @@ namespace FrmViews.Nodes
 
     [STNode("设备通讯", "xioa", null, null,
         "向指定光源发送字符串指令，输入和输出端口均支持多连接。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public class LightSourceNode : WorkflowNode, IEditorExecutableNode
     {
         public LightSourceNode()

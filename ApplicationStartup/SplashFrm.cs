@@ -9,6 +9,8 @@ using FrmViews;
 
 namespace ApplicationStartup
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public partial class SplashFrm : Form
     {
         private const int MinimumVisibleMilliseconds = 1200;

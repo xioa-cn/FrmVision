@@ -8,6 +8,8 @@ using FrmServices.ViewModel;
 
 namespace FrmViews.Views
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public partial class Login : ViewModelFrm, IViewModelFrm<LoginViewModel>
     {
         public Login()

@@ -21,6 +21,8 @@ using FrmViews.Views;
 
 namespace FrmViews
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public partial class MainFrm : ViewModelFrm, IViewModelFrm<MainFrmViewModel>
     {
         private const int WorkflowShutdownTimeoutMilliseconds = 3000;

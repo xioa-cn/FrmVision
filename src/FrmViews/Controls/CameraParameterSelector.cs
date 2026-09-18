@@ -7,6 +7,8 @@ using FrmServices.ViewModel;
 
 namespace FrmViews.Controls
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     internal sealed partial class CameraParameterSelector : UserControl
     {
         private CameraPanelViewModel _camera;
@@ -111,6 +113,8 @@ namespace FrmViews.Controls
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     internal sealed class ParameterSwitchRequestedEventArgs : EventArgs
     {
         public ParameterSwitchRequestedEventArgs(CameraPanelViewModel camera, string parameterName)

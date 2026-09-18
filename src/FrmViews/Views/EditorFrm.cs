@@ -22,6 +22,8 @@ namespace FrmViews.Views
     ///一轮流程失败后：等待 5000 ms 再重试。
     ///节点自身执行时间，例如相机采集、视觉处理、PLC 通讯，不算节点衔接延时。
     /// </summary>
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public partial class EditorFrm : ViewModelFrm, IViewModelFrm<EditorViewModel>
     {
         private bool _isBound;

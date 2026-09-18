@@ -6,6 +6,8 @@ namespace FrmViews.Nodes
 {
     [STNode("数据源", "xioa", null, null,
         "输出一个固定数值，供后续节点使用。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class NumNode : WorkflowNode, IEditorExecutableNode
     {
         private double _value;

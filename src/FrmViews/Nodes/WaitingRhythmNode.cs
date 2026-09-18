@@ -6,6 +6,8 @@ namespace FrmViews.Nodes
 {
     [STNode("流程控制", "xioa", null, null,
         "将本轮输入原样输出，用于让下游节点比同级分支晚一拍执行。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class WaitingRhythmNode : WorkflowNode, IEditorExecutableNode,
         IEditorNodeReadiness
     {

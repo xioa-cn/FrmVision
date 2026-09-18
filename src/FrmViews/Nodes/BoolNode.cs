@@ -12,6 +12,8 @@ namespace FrmViews.Nodes
         Or
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class BoolNodeExecutionResult
     {
         public bool IsSuccess { get; set; }
@@ -23,6 +25,8 @@ namespace FrmViews.Nodes
 
     [STNode("逻辑判断", "xioa", null, null,
         "对多个布尔输入执行且或判断，并从 True 或 False 端口继续流程。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class BoolNode : WorkflowNode, IEditorExecutableNode,
         IEditorNodeReadiness
     {
@@ -188,6 +192,8 @@ namespace FrmViews.Nodes
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class BoolJudgmentModePropertyDescriptor :
         STNodePropertyDescriptor
     {

@@ -27,6 +27,8 @@ namespace FrmServices.Services.EditorServices
         EditorNodeReadinessResult CanExecute(EditorExecutionContext context);
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class EditorExecutionContext
     {
         private readonly object _activatedInputsRoot = new object();
@@ -320,6 +322,8 @@ namespace FrmServices.Services.EditorServices
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class EditorFlowSignal
     {
         public EditorFlowSignal(Guid executionId)
@@ -332,6 +336,8 @@ namespace FrmServices.Services.EditorServices
         public DateTime CreatedAt { get; }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class EditorNodeReadinessResult
     {
         private EditorNodeReadinessResult(bool isReady, string message)
@@ -354,6 +360,8 @@ namespace FrmServices.Services.EditorServices
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class EditorNodeExecutionResult
     {
         private EditorNodeExecutionResult(bool isSuccess, string message, STNodeOption[] activeOutputs)
@@ -379,6 +387,8 @@ namespace FrmServices.Services.EditorServices
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class EditorExecutionStep
     {
         internal EditorExecutionStep(int sequence, STNode node, bool isSuccess,
@@ -407,6 +417,8 @@ namespace FrmServices.Services.EditorServices
         public bool EnableExecutionLog { get; }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class EditorNodeExecutionEventArgs : EventArgs
     {
         internal EditorNodeExecutionEventArgs(Guid flowStartNodeGuid, STNode node,
@@ -434,6 +446,8 @@ namespace FrmServices.Services.EditorServices
         public string RuntimeValueText { get; }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class EditorExecutionResult
     {
         internal EditorExecutionResult(Guid executionId, bool isSuccess,

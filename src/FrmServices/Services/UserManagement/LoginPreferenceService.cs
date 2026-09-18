@@ -7,6 +7,8 @@ using FrmCommon.ConfigUtils;
 
 namespace FrmServices.Services.UserManagement
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class LoginPreferences
     {
         public LoginPreferences(string userName, string password,
@@ -31,6 +33,8 @@ namespace FrmServices.Services.UserManagement
             bool autoLogin);
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class LoginPreferenceService : ILoginPreferenceStore
     {
         private static readonly byte[] AdditionalEntropy = Encoding.UTF8.GetBytes(
@@ -121,6 +125,8 @@ namespace FrmServices.Services.UserManagement
         }
 
         [DataContract]
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class LoginPreferenceData
         {
             [DataMember(Order = 1)]

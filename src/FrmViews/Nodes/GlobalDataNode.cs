@@ -13,6 +13,8 @@ namespace FrmViews.Nodes
         Write
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class GlobalDataChangedEventArgs : EventArgs
     {
         public GlobalDataChangedEventArgs(string key, object value, bool exists)
@@ -27,6 +29,8 @@ namespace FrmViews.Nodes
         public bool Exists { get; }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public static class GlobalDataStore
     {
         private static readonly ConcurrentDictionary<string, object> Data =
@@ -98,6 +102,8 @@ namespace FrmViews.Nodes
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class GlobalDataNodeExecutionResult
     {
         public bool IsSuccess { get; set; }
@@ -109,6 +115,8 @@ namespace FrmViews.Nodes
 
     [STNode("数据源", "xioa", null, null,
         "按 Key 写入或读取进程内共享的全局数据。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class GlobalDataNode : WorkflowNode, IEditorExecutableNode,
         IEditorNodeReadiness
     {
@@ -361,6 +369,8 @@ namespace FrmViews.Nodes
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class GlobalDataModePropertyDescriptor :
         STNodePropertyDescriptor
     {

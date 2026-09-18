@@ -3,6 +3,8 @@ using FrmVpComponents.Services;
 
 namespace FrmServices.Utils;
 
+// 作者：xioa
+// 作者邮箱：1327916255@qq.com
 public static class BlockToolUtils
 {
     /// <summary>

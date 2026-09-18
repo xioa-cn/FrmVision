@@ -7,6 +7,8 @@ namespace FrmViews.Nodes
 {
     [STNode("流程控制", "xioa", null, null,
         "读取指定的手动触发状态；状态为 True 时继续执行下一个节点。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class ManualTriggerNode : WorkflowNode, IEditorExecutableNode,
         IEditorNodeReadiness
     {

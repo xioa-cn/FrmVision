@@ -16,6 +16,8 @@ using FrmVpComponents.Services;
 namespace FrmServices.ViewModel
 {
     [System.Runtime.Serialization.DataContract]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class CameraDisplayConfiguration
     {
         [System.Runtime.Serialization.DataMember]
@@ -31,6 +33,8 @@ namespace FrmServices.ViewModel
         public string ParameterName { get; set; }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class MainFrmViewModel : ObservableObject
     {
         public EditorViewModel EditorViewModel { get; set; }

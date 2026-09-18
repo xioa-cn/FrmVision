@@ -9,6 +9,8 @@ using ST.Library.UI.NodeEditor;
 
 namespace FrmViews.Services
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class WorkflowRuntime : IDisposable
     {
         private readonly object _stateRoot = new object();

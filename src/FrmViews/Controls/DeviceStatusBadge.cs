@@ -5,6 +5,8 @@ using FrmServices.ViewModel;
 
 namespace FrmViews.Controls
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public partial class DeviceStatusBadge : UserControl
     {
         private DeviceStatusViewModel _viewModel;

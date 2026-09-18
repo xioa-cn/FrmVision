@@ -4,6 +4,8 @@ using System.Windows.Forms;
 
 namespace FrmViews.Controls
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     internal static class UiTheme
     {
         public static readonly Color Page = Color.FromArgb(245, 247, 250);
@@ -91,6 +93,8 @@ namespace FrmViews.Controls
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     internal sealed class ModernTabControl : TabControl
     {
         public ModernTabControl()
@@ -134,6 +138,8 @@ namespace FrmViews.Controls
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     internal sealed class ModernMenuRenderer : ToolStripProfessionalRenderer
     {
         public ModernMenuRenderer() : base(new ModernMenuColorTable())
@@ -142,6 +148,8 @@ namespace FrmViews.Controls
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     internal sealed class ModernMenuColorTable : ProfessionalColorTable
     {
         public override Color MenuItemSelected => UiTheme.PrimarySoft;

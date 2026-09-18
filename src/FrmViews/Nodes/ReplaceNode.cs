@@ -11,12 +11,16 @@ using ST.Library.UI.NodeEditor;
 
 namespace FrmViews.Nodes
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     internal sealed class ReplaceItemDefinition
     {
         public string Find { get; set; }
         public string Replacement { get; set; }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     internal static class ReplaceItemSerializer
     {
         public static string Serialize(IEnumerable<ReplaceItemDefinition> items)
@@ -79,6 +83,8 @@ namespace FrmViews.Nodes
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class ReplaceNodeExecutionResult
     {
         public bool IsSuccess { get; set; }
@@ -90,6 +96,8 @@ namespace FrmViews.Nodes
 
     [STNode("数据处理", "xioa", null, null,
         "按列表顺序替换字符串内容，并输出最终字符串。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class ReplaceNode : WorkflowNode, IEditorExecutableNode,
         IEditorNodeReadiness
     {
@@ -196,6 +204,8 @@ namespace FrmViews.Nodes
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class ReplaceItemsPropertyDescriptor : STNodePropertyDescriptor
     {
         protected override string GetStringFromValue()

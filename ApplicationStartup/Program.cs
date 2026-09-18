@@ -3,6 +3,8 @@ using System.Windows.Forms;
 
 namespace ApplicationStartup
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     internal static class Program
     {
         /// <summary>

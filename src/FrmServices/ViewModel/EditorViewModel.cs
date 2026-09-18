@@ -6,6 +6,8 @@ using FrmCommon.ConfigUtils;
 namespace FrmServices.ViewModel
 {
     [DataContract]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class EditorDataFile
     {
         [DataMember(Order = 1)]
@@ -15,6 +17,8 @@ namespace FrmServices.ViewModel
         public string CanvasData { get; set; }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public class EditorViewModel
     {
         private const int CurrentDataVersion = 1;

@@ -10,6 +10,8 @@ using FrmServices.LogServices;
 
 namespace FrmVpComponents.Services
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     internal sealed class ToolsModel
     {
         public Dictionary<string, Dictionary<string, CogToolBlock>> ToolBlocks { get; } =
@@ -19,6 +21,8 @@ namespace FrmVpComponents.Services
             new Dictionary<string, Dictionary<string, CogAcqFifoTool>>(StringComparer.OrdinalIgnoreCase);
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class RecipeToolSwitchResult
     {
         internal RecipeToolSwitchResult(string productionKey,
@@ -37,6 +41,8 @@ namespace FrmVpComponents.Services
     /// <summary>
     /// 管理 VisionPro 视觉工具和相机工具的加载、访问及释放。
     /// </summary>
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class BlockTool : IDisposable
     {
         private static readonly Lazy<BlockTool> LazyInstance =

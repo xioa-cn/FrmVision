@@ -6,6 +6,8 @@ using ST.Library.UI.NodeEditor;
 
 namespace FrmViews.Nodes
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class CharacterMergingNodeExecutionResult
     {
         public bool IsSuccess { get; set; }
@@ -17,6 +19,8 @@ namespace FrmViews.Nodes
 
     [STNode("数据处理", "xioa", null, null,
         "将两个输入转换为字符串，并按字符串 1 + 字符串 2 的顺序合并输出。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class CharacterMergingNode : WorkflowNode,
         IEditorExecutableNode, IEditorNodeReadiness
     {

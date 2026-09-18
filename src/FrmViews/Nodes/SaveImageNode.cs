@@ -8,6 +8,8 @@ using ST.Library.UI.NodeEditor;
 
 namespace FrmViews.Nodes
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class SaveImageNodeExecutionResult
     {
         public bool IsSuccess { get; set; }
@@ -20,6 +22,8 @@ namespace FrmViews.Nodes
 
     [STNode("视觉图像", "xioa", null, null,
         "接收完整文件路径，以及相机图像或视觉记录集合并保存图片。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class SaveImageNode : WorkflowNode, IEditorExecutableNode,
         IEditorNodeReadiness
     {

@@ -4,6 +4,8 @@ using ST.Library.UI.NodeEditor;
 
 namespace FrmViews.Nodes
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class NegateNodeExecutionResult
     {
         public bool IsSuccess { get; set; }
@@ -14,6 +16,8 @@ namespace FrmViews.Nodes
 
     [STNode("逻辑判断", "xioa", null, null,
         "对一个 bool 输入值取反，并输出取反后的 bool 值。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class NegateNode : WorkflowNode, IEditorExecutableNode,
         IEditorNodeReadiness
     {

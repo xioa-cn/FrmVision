@@ -4,6 +4,8 @@ using ST.Library.UI.NodeEditor;
 
 namespace FrmViews.Nodes
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class PlcComparisonOutputsPropertyDescriptor : STNodePropertyDescriptor
     {
         protected override void OnMouseClick(MouseEventArgs e)

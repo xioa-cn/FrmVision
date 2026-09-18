@@ -11,6 +11,8 @@ using System.Xml.Linq;
 
 namespace FrmServices.LogServices
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class LogService
     {
         private const string FilePrefix = "frmvision-";
@@ -430,6 +432,8 @@ namespace FrmServices.LogServices
             }
         }
 
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class PendingLogEntry
         {
             public PendingLogEntry(LogEntry entry, string directory)
@@ -449,6 +453,8 @@ namespace FrmServices.LogServices
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public static class AppLog
     {
         public static void Debug(string message, string source = null) => LogService.Default.Debug(message, source);

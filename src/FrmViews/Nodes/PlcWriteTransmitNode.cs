@@ -6,6 +6,8 @@ using ST.Library.UI.NodeEditor;
 
 namespace FrmViews.Nodes
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class PlcWriteTransmitNodeExecutionResult
     {
         public bool IsSuccess { get; set; }
@@ -19,6 +21,8 @@ namespace FrmViews.Nodes
 
     [STNode("设备通讯", "xioa", null, null,
         "将输入值或固定值写入 PLC，写入成功后把实际写入值传递给下游。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class PlcWriteTransmitNode : WorkflowNode,
         IEditorExecutableNode, IEditorNodeReadiness
     {

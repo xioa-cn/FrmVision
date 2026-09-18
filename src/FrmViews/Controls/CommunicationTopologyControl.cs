@@ -7,6 +7,8 @@ using FrmServices.ViewModel;
 
 namespace FrmViews.Controls
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     internal sealed class CommunicationTopologyControl : UserControl
     {
         private readonly CommunicationLaneControl _plcLane;
@@ -85,6 +87,8 @@ namespace FrmViews.Controls
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     internal sealed class CommunicationLaneControl : UserControl
     {
         private const int HeaderHeight = 54;
@@ -483,6 +487,8 @@ namespace FrmViews.Controls
         }
     }
     
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     internal sealed class CommunicationDeviceSelectedEventArgs : EventArgs
     {
         public CommunicationDeviceSelectedEventArgs(

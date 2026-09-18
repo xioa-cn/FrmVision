@@ -7,6 +7,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace FrmServices.ViewModel
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public static class MainMenuKeys
     {
         public const string System = "System";
@@ -40,6 +42,8 @@ namespace FrmServices.ViewModel
         public const string ContentCommunication = "ContentClient";
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class NavigationMenuItemViewModel : ObservableObject
     {
         private string _text;

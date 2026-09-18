@@ -15,6 +15,8 @@ namespace FrmViews.Nodes
         Divide
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class RandomNodeExecutionResult
     {
         public bool IsSuccess { get; set; }
@@ -29,6 +31,8 @@ namespace FrmViews.Nodes
     [STNode("数据处理", "xioa", null, null,
         "生成指定范围内的随机数；可选择与输入数字进行加、减、乘、除运算，" +
         "也可不参考输入直接输出随机数。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class RandomNode : WorkflowNode, IEditorExecutableNode,
         IEditorNodeReadiness
     {
@@ -272,6 +276,8 @@ namespace FrmViews.Nodes
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class RandomNodeOperationPropertyDescriptor :
         STNodePropertyDescriptor
     {

@@ -46,6 +46,8 @@ namespace FrmViews.Nodes
         FixedValue
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class PlcWriteItemExecutionResult
     {
         public string Key { get; set; }
@@ -57,6 +59,8 @@ namespace FrmViews.Nodes
         public string Message { get; set; }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class PlcNodeExecutionResult
     {
         public bool IsSuccess { get; set; }
@@ -69,6 +73,8 @@ namespace FrmViews.Nodes
         public string Message { get; set; }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     internal sealed class PlcWriteItemDefinition
     {
         public string Key { get; set; }
@@ -78,6 +84,8 @@ namespace FrmViews.Nodes
         public string FixedValue { get; set; }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     internal static class PlcWriteItemSerializer
     {
         public static string Serialize(IEnumerable<PlcWriteItemDefinition> items)
@@ -160,6 +168,8 @@ namespace FrmViews.Nodes
 
     [STNode("设备通讯", "xioa", null, null,
         "读取 PLC 点位并按条件输出，或将多个输入和固定值写入不同点位。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public class PlcNode : WorkflowNode, IEditorExecutableNode, IEditorNodeReadiness
     {
         private readonly List<ComparisonOutput> _comparisonOutputs =
@@ -799,6 +809,8 @@ namespace FrmViews.Nodes
         private static ulong ParseUInt64(string value) =>
             ulong.Parse(value, NumberStyles.Integer, CultureInfo.InvariantCulture);
 
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class ComparisonDefinition
         {
             public ComparisonDefinition(char comparisonOperator,
@@ -814,6 +826,8 @@ namespace FrmViews.Nodes
             public string Label { get; }
         }
 
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class ComparisonOutput
         {
             public ComparisonOutput(char comparisonOperator,
@@ -830,6 +844,8 @@ namespace FrmViews.Nodes
             public string Label => Option.Text;
         }
 
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class WriteItem
         {
             public WriteItem(PlcWriteItemDefinition definition,
@@ -843,6 +859,8 @@ namespace FrmViews.Nodes
             public STNodeOption Option { get; }
         }
 
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class PreparedWrite
         {
             public PreparedWrite(PlcWriteItemDefinition definition, object value)

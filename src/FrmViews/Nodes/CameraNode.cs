@@ -8,6 +8,8 @@ using ST.Library.UI.NodeEditor;
 
 namespace FrmViews.Nodes
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class CameraNodeExecutionResult
     {
         public bool IsSuccess { get; set; }
@@ -20,6 +22,8 @@ namespace FrmViews.Nodes
 
     [STNode("视觉图像", "xioa", null, null,
         "运行指定的 VisionPro 相机工具，并将 ICogImage 输出给后续节点。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public class CameraNode : WorkflowNode, IEditorExecutableNode
     {
         public CameraNode()

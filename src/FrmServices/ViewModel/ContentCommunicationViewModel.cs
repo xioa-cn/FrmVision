@@ -27,6 +27,8 @@ public enum ContentCommunicationType
     UDPSERVICE
 }
 
+// 作者：xioa
+// 作者邮箱：1327916255@qq.com
 public sealed class ContentCommunicationConfiguration
 {
     [Browsable(false)] public string Id { get; set; } = Guid.NewGuid().ToString("N");
@@ -100,6 +102,8 @@ public sealed class ContentCommunicationConfiguration
 }
 
 // The main window owns this instance; closing the configuration dialog keeps transports alive.
+// 作者：xioa
+// 作者邮箱：1327916255@qq.com
 public sealed class ContentCommunicationViewModel : IDisposable
 {
     private readonly object _sync = new object();
@@ -676,6 +680,8 @@ public sealed class ContentCommunicationViewModel : IDisposable
     }
 }
 
+// 作者：xioa
+// 作者邮箱：1327916255@qq.com
 public sealed class CommunicationEncodingConverter : StringConverter
 {
     public override bool GetStandardValuesSupported(ITypeDescriptorContext context) => true;

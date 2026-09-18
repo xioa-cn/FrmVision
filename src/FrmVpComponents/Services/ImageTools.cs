@@ -22,6 +22,8 @@ namespace FrmVpComponents.Services
     /// <summary>
     /// VisionPro 图片和检测数据文件保存工具。
     /// </summary>
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public static class ImageTools
     {
         private static readonly object CsvWriteLock = new object();

@@ -6,6 +6,8 @@ using FrmViews.Controls;
 
 namespace FrmViews.Views
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     internal sealed class TrimItemsEditorFrm : Form
     {
         private readonly DataGridView _grid;

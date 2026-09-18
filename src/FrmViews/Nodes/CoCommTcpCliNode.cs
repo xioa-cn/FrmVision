@@ -12,6 +12,8 @@ namespace FrmViews.Nodes
 
     [STNode("内置通讯", "xioa", null, null,
         "读取内置 TCP 客户端收到的文本并传递，或向连接的服务器发送输入值 / 固定文本。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class CoCommTcpCliNode : WorkflowNode, IEditorExecutableNode, IEditorNodeReadiness
     {
         public CoCommTcpCliNode()

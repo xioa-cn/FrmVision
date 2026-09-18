@@ -14,6 +14,8 @@ namespace FrmViews.Nodes
         Divide
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class CalcNumNodeExecutionResult
     {
         public bool IsSuccess { get; set; }
@@ -26,6 +28,8 @@ namespace FrmViews.Nodes
 
     [STNode("数据处理", "xioa", null, null,
         "对两个数字执行加、减、乘、除运算，并输出计算结果。")]
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class CalcNumNode : WorkflowNode, IEditorExecutableNode,
         IEditorNodeReadiness
     {
@@ -176,6 +180,8 @@ namespace FrmViews.Nodes
         }
     }
 
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class CalcNumOperationPropertyDescriptor :
         STNodePropertyDescriptor
     {

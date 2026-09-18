@@ -6,6 +6,8 @@ using System.Text;
 
 namespace FrmCommon.ConfigUtils
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public static class HslAuthExtensios
     {
         private static readonly object SyncRoot = new object();
@@ -115,6 +117,8 @@ namespace FrmCommon.ConfigUtils
         }
 
         [DataContract]
+        // 作者：xioa
+        // 作者邮箱：1327916255@qq.com
         private sealed class HslAuthorizationData
         {
             [DataMember(Order = 1)]

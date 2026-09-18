@@ -7,6 +7,8 @@ using FrmCommon;
 
 namespace FrmServices.Services
 {
+    // 作者：xioa
+    // 作者邮箱：1327916255@qq.com
     public sealed class ParameterCatalogService
     {
         public Task<IReadOnlyDictionary<string, IReadOnlyList<string>>> GetCatalogAsync()
